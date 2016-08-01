@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>愿无岁月可回首</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2016-08-01T08:37:31.727Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>沈宇杰</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript 跨域(二)之 JSONP</title>
+    <link href="http://yoursite.com/2016/07/29/JavaScript-%E8%B7%A8%E5%9F%9F%E4%B9%8BJSONP/"/>
+    <id>http://yoursite.com/2016/07/29/JavaScript-跨域之JSONP/</id>
+    <published>2016-07-29T03:39:40.000Z</published>
+    <updated>2016-08-01T08:37:31.727Z</updated>
+    
+    <content type="html">&lt;p&gt;浏览器的同源策略在保障了我们的数据安全，但是在进行一些比较深入的前端编程的时候却略显苛刻。JSONP 的跨域 GET 请求是一个常用的解决方案，下面我们来看一下 JSONP 是如何实现的，并探讨下 JSONP 的跨域原理&lt;/p&gt;
+&lt;h2 id=&quot;JSONP-的定义&quot;&gt;&lt;a href=&quot;#JSONP-的定义&quot; class=&quot;headerlink&quot; title=&quot;JSONP 的定义&quot;&gt;&lt;/a&gt;JSONP 的定义&lt;/h2&gt;&lt;p&gt;Jsonp(JSON with Padding) 是 json 的一种”使用模式”，可以让网页从别的域名（网站）那获取资料，即跨域读取数据&lt;/p&gt;
+&lt;h2 id=&quot;JSONP-的原理&quot;&gt;&lt;a href=&quot;#JSONP-的原理&quot; class=&quot;headerlink&quot; title=&quot;JSONP 的原理&quot;&gt;&lt;/a&gt;JSONP 的原理&lt;/h2&gt;&lt;p&gt;通过动态插入一个script标签。浏览器对 script 的资源引用没有同源限制，同时资源加载到页面后会立即执行（没有阻塞的情况下）&lt;/p&gt;
+&lt;h2 id=&quot;JSONP-的使用&quot;&gt;&lt;a href=&quot;#JSONP-的使用&quot; class=&quot;headerlink&quot; title=&quot;JSONP 的使用&quot;&gt;&lt;/a&gt;JSONP 的使用&lt;/h2&gt;&lt;h3 id=&quot;1-服务端JSONP格式数据&quot;&gt;&lt;a href=&quot;#1-服务端JSONP格式数据&quot; class=&quot;headerlink&quot; title=&quot;1. 服务端JSONP格式数据&quot;&gt;&lt;/a&gt;1. 服务端JSONP格式数据&lt;/h3&gt;&lt;p&gt;这里以 PHP 为例子 :&lt;br&gt;PS : 使用的是 W3C 的服务端例子，可以访问:&lt;br&gt;&lt;a href=&quot;http://www.runoob.com/try/ajax/jsonp.php?jsonp=callbackFunction&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.runoob.com/try/ajax/jsonp.php?jsonp=callbackFunction&lt;/a&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;php&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;lt;?php&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;header(&lt;span class=&quot;string&quot;&gt;&#39;Content-type: application/json&#39;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//获取回调函数名&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$jsoncallback = htmlspecialchars($_REQUEST [&lt;span class=&quot;string&quot;&gt;&#39;jsoncallback&#39;&lt;/span&gt;]);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//json数据&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$json_data = &lt;span class=&quot;string&quot;&gt;&#39;[&quot;customername1&quot;,&quot;customername2&quot;]&#39;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//输出jsonp格式的数据&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;echo&lt;/span&gt; $jsoncallback . &lt;span class=&quot;string&quot;&gt;&quot;(&quot;&lt;/span&gt; . $json_data . &lt;span class=&quot;string&quot;&gt;&quot;)&quot;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;2-客户端实现-callbackFunction-函数&quot;&gt;&lt;a href=&quot;#2-客户端实现-callbackFunction-函数&quot; class=&quot;headerlink&quot; title=&quot;2. 客户端实现 callbackFunction 函数&quot;&gt;&lt;/a&gt;2. 客户端实现 callbackFunction 函数&lt;/h3&gt;&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;javascript&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;callbackFunction&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;result, methodName&lt;/span&gt;)&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; html = &lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;ul&amp;gt;&#39;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; result.length; i++)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        html += &lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;li&amp;gt;&#39;&lt;/span&gt; + result[i] + &lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;/li&amp;gt;&#39;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    html += &lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;/ul&amp;gt;&#39;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementById(&lt;span class=&quot;string&quot;&gt;&#39;divCustomers&#39;&lt;/span&gt;).innerHTML = html;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;3-客户端页面完成展示&quot;&gt;&lt;a href=&quot;#3-客户端页面完成展示&quot; class=&quot;headerlink&quot; title=&quot;3. 客户端页面完成展示&quot;&gt;&lt;/a&gt;3. 客户端页面完成展示&lt;/h3&gt;&lt;p&gt;ps:服务端使用 w3c 的实现&lt;/p&gt;
+&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;divCustomers&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;javascript&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;callbackFunction&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;result, methodName&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; html = &lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;ul&amp;gt;&#39;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; result.length; i++) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            html += &lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;li&amp;gt;&#39;&lt;/span&gt; + result[i] + &lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;/li&amp;gt;&#39;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        html += &lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;/ul&amp;gt;&#39;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementById(&lt;span class=&quot;string&quot;&gt;&#39;divCustomers&#39;&lt;/span&gt;).innerHTML = html;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;src&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://www.runoob.com/try/ajax/jsonp.php?jsoncallback=callbackFunction&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;undefined&quot;&gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;4-JS代码中插入-script-标签进行跨域&quot;&gt;&lt;a href=&quot;#4-JS代码中插入-script-标签进行跨域&quot; class=&quot;headerlink&quot; title=&quot;4. JS代码中插入 script 标签进行跨域&quot;&gt;&lt;/a&gt;4. JS代码中插入 script 标签进行跨域&lt;/h3&gt;&lt;figure class=&quot;highlight dart&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; _script = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.createElement(&lt;span class=&quot;string&quot;&gt;&#39;script&#39;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;_script.type = &lt;span class=&quot;string&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;_script.src = &lt;span class=&quot;string&quot;&gt;&quot;http://www.runoob.com/try/ajax/jsonp.php?jsonp=callbackFunction&quot;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.head.appendChild(_script);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;5-jQuery-中使用-JSONP&quot;&gt;&lt;a href=&quot;#5-jQuery-中使用-JSONP&quot; class=&quot;headerlink&quot; title=&quot;5. jQuery 中使用 JSONP&quot;&gt;&lt;/a&gt;5. jQuery 中使用 JSONP&lt;/h3&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$.getJSON(&lt;span class=&quot;string&quot;&gt;&quot;http://www.runoob.com/try/ajax/jsonp.php?jsoncallback=?&quot;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;data&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 对 data 进行处理&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;JSONP-的缺点&quot;&gt;&lt;a href=&quot;#JSONP-的缺点&quot; class=&quot;headerlink&quot; title=&quot;JSONP 的缺点&quot;&gt;&lt;/a&gt;JSONP 的缺点&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;这种方式无法发送post请求 &lt;a href=&quot;http://stackoverflow.com/questions/3860111/how-to-make-a-jsonp-post-request-that-specifies-contenttype-with-jquery&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;详情&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;无法明确判定此次请求是否成功（大多数框架使用超时时间来模拟）&lt;/li&gt;
+&lt;li&gt;需要用户传递一个&lt;code&gt;callback&lt;/code&gt;参数给服务端&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;浏览器的同源策略在保障了我们的数据安全，但是在进行一些比较深入的前端编程的时候却略显苛刻。JSONP 的跨域 GET 请求是一个常用的解决方案，下面我们来看一下 JSONP 是如何实现的，并探讨下 JSONP 的跨域原理&lt;/p&gt;
+&lt;h2 id=&quot;JSONP-的定义&quot;&gt;&lt;a 
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript 跨域(一)之浏览器的同源策略</title>
+    <link href="http://yoursite.com/2016/07/28/JavaScript-%E8%B7%A8%E5%9F%9F%E4%B9%8B%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5/"/>
+    <id>http://yoursite.com/2016/07/28/JavaScript-跨域之浏览器的同源策略/</id>
+    <published>2016-07-28T02:54:35.000Z</published>
+    <updated>2016-08-01T08:37:49.306Z</updated>
+    
+    <content type="html">&lt;p&gt;浏览器的安全基于同源策略(same-origin policy)，根据 MDN 中对于同源策略的解释，它限制了一个源(origin)中加载文本或脚本与来自其他源(origin)中资源的交互方式。此文主要介绍同源政策，为接下去探讨跨域的一系列方式做准备。&lt;/p&gt;
+&lt;h2 id=&quot;同源含义&quot;&gt;&lt;a href=&quot;#同源含义&quot; class=&quot;headerlink&quot; title=&quot;同源含义&quot;&gt;&lt;/a&gt;同源含义&lt;/h2&gt;&lt;p&gt;如果两个页面拥有相同的协议，端口（若指定），和主机，那么这两个页面就属于同一个源&lt;/p&gt;
+&lt;h3 id=&quot;同源指的三个相同&quot;&gt;&lt;a href=&quot;#同源指的三个相同&quot; class=&quot;headerlink&quot; title=&quot;同源指的三个相同&quot;&gt;&lt;/a&gt;同源指的三个相同&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;协议相同（protocol）&lt;/li&gt;
+&lt;li&gt;端口相同（如果指定）&lt;/li&gt;
+&lt;li&gt;域名相同&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;端口协议域名解析：&quot;&gt;&lt;a href=&quot;#端口协议域名解析：&quot; class=&quot;headerlink&quot; title=&quot;端口协议域名解析：&quot;&gt;&lt;/a&gt;端口协议域名解析：&lt;/h3&gt;&lt;h4 id=&quot;http-www-company-com-dir-page-html&quot;&gt;&lt;a href=&quot;#http-www-company-com-dir-page-html&quot; class=&quot;headerlink&quot; title=&quot;http://www.company.com/dir/page.html&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http://www.company.com/dir/page.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.company.com/dir/page.html&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;协议是 http://&lt;/li&gt;
+&lt;li&gt;域名是 www.company.com&lt;/li&gt;
+&lt;li&gt;端口是 80 (未指定，默认)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;同源策略的目的&quot;&gt;&lt;a href=&quot;#同源策略的目的&quot; class=&quot;headerlink&quot; title=&quot;同源策略的目的&quot;&gt;&lt;/a&gt;同源策略的目的&lt;/h3&gt;&lt;p&gt;同源政策是必须的，譬如 A 网站的 cookie 中含有敏感信息，用户若是访问 A 网站后再去访问其他网站，若是无同源政策，那么其他网站便可获取用户在A网站中的信息，此时若是恰好账号密码等敏感信息存于 cookie 中，此时便会有巨大的隐患。由此可见，”同源策略”是必需的，否则 Cookie 可以共享，互联网就毫无安全可言了。&lt;/p&gt;
+&lt;h3 id=&quot;同源策略的限制&quot;&gt;&lt;a href=&quot;#同源策略的限制&quot; class=&quot;headerlink&quot; title=&quot;同源策略的限制&quot;&gt;&lt;/a&gt;同源策略的限制&lt;/h3&gt;&lt;p&gt;虽然同源策略很有必要，但是随着互联网的发展，同源策略也越来越严格。目前如果非同源，会有下面三种行为受到限制。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cookie、LocalStorage 和 IndexDB 无法读取&lt;/li&gt;
+&lt;li&gt;DOM 无法获得&lt;/li&gt;
+&lt;li&gt;AJAX 请求不能发送&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;同源策略的例子&quot;&gt;&lt;a href=&quot;#同源策略的例子&quot; class=&quot;headerlink&quot; title=&quot;同源策略的例子&quot;&gt;&lt;/a&gt;同源策略的例子&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;URL&lt;/th&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;说明&lt;/th&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;是否允许通讯&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.a.com/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.a.com/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;同一域名下&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;允许&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.a.com/lab/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/lab/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.a.com/script/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/script/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;同一域名下不同文件夹&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;允许&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.a.com:8000/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com:8000/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.a.com/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;同一域名，不同端口&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;不允许&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.a.com/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.a.com/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.a.com/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;一域名，不同协议&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;不允许&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.a.com/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://192.168.199.1/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://192.168.199.1/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;域名和域名对应ip&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;不允许&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.a.com/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://script.a.com/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://script.a.com/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;主域相同，子域不同&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;不允许&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.a.com/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://a.com/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://a.com/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;同一域名，不同二级域名（同上）&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;不允许（cookie这种情况下也不允许访问）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.cnblogs.com/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.a.com/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;不同域名&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;不允许&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&quot;PS-有两点比较特殊&quot;&gt;&lt;a href=&quot;#PS-有两点比较特殊&quot; class=&quot;headerlink&quot; title=&quot;PS:有两点比较特殊&quot;&gt;&lt;/a&gt;PS:有两点比较特殊&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;如果是协议和端口造成的跨域问题无法在前端解决&lt;/li&gt;
+&lt;li&gt;在跨域问题上，域仅仅是通过”URL的首部”来识别而不会去尝试判断相同的 ip 地址对应着两个域或两个域是否在同一个 ip 上, URL首部指的是：&lt;code&gt;window.location.protocol +window.location.host&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;同源的继承&quot;&gt;&lt;a href=&quot;#同源的继承&quot; class=&quot;headerlink&quot; title=&quot;同源的继承&quot;&gt;&lt;/a&gt;同源的继承&lt;/h3&gt;&lt;p&gt;来自about:blank，javascript:和data:URLs中的内容，继承了将其载入的文档所指定的源，因为它们的URL本身未指定任何关于自身源的信息&lt;/p&gt;
+&lt;h3 id=&quot;IE-的同源特例&quot;&gt;&lt;a href=&quot;#IE-的同源特例&quot; class=&quot;headerlink&quot; title=&quot;IE 的同源特例&quot;&gt;&lt;/a&gt;IE 的同源特例&lt;/h3&gt;&lt;p&gt;在处理同源策略的问题上，IE存在两个主要的不同之处&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;授信范围（Trust Zones）：两个相互之间高度互信的域名，如公司域名（corporate domains），不遵守同源策略的限制。&lt;/li&gt;
+&lt;li&gt;端口：IE未将端口号加入到同源策略的组成部分之中，&lt;br&gt;因此 &lt;a href=&quot;http://company.com:81/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://company.com:81/index.html&lt;/a&gt; 和&lt;a href=&quot;http://company.com/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://company.com/index.html&lt;/a&gt;  属于同源并且不受任何限制。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些例外是非标准的，其它浏览器也未做出支持，但会助于开发基于window RT IE的应用程序。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;浏览器的安全基于同源策略(same-origin policy)，根据 MDN 中对于同源策略的解释，它限制了一个源(origin)中加载文本或脚本与来自其他源(origin)中资源的交互方式。此文主要介绍同源政策，为接下去探讨跨域的一系列方式做准备。&lt;/p&gt;
+&lt;h2 id
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://yoursite.com/categories/javascript/"/>
+    
+    
+      <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript 深拷贝</title>
+    <link href="http://yoursite.com/2016/07/26/JavaScript-%E6%B7%B1%E6%8B%B7%E8%B4%9D/"/>
+    <id>http://yoursite.com/2016/07/26/JavaScript-深拷贝/</id>
+    <published>2016-07-26T02:55:47.000Z</published>
+    <updated>2016-07-26T09:32:17.493Z</updated>
+    
+    <content type="html">&lt;p&gt;为了防止变量被污染，我们需要对对象（或数组）进行拷贝，由于JS不像 C 等高级语言一般，可以指定传值或是传地址，故而我们需要对 JS 手工扩展深拷贝的方法&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;最为简单的深拷贝方式&quot;&gt;&lt;a href=&quot;#最为简单的深拷贝方式&quot; class=&quot;headerlink&quot; title=&quot;最为简单的深拷贝方式&quot;&gt;&lt;/a&gt;最为简单的深拷贝方式&lt;/h2&gt;&lt;p&gt;深拷贝的方式有很多，我们先看一种最为简单的方式：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：它能正确处理的对象只有 Number, String, Boolean, Array, 扁平对象，即那些能够被 json 直接表示的数据结构&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; cloneObj = &lt;span class=&quot;built_in&quot;&gt;JSON&lt;/span&gt;.parse(&lt;span class=&quot;built_in&quot;&gt;JSON&lt;/span&gt;.stringify(obj));&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这种方式简单实用，但是会丢失对象的constructor，深拷贝之后无论原先的构造函数是什么，都会变为 Object 类型，另外 RegExp 对象也无法通过这种方式深拷贝&lt;/p&gt;
+&lt;h2 id=&quot;单纯深拷贝数组或是JSON（亦或是两者混合嵌套）&quot;&gt;&lt;a href=&quot;#单纯深拷贝数组或是JSON（亦或是两者混合嵌套）&quot; class=&quot;headerlink&quot; title=&quot;单纯深拷贝数组或是JSON（亦或是两者混合嵌套）&quot;&gt;&lt;/a&gt;单纯深拷贝数组或是JSON（亦或是两者混合嵌套）&lt;/h2&gt;&lt;h4 id=&quot;描述-递归实现深拷贝&quot;&gt;&lt;a href=&quot;#描述-递归实现深拷贝&quot; class=&quot;headerlink&quot; title=&quot;描述 : 递归实现深拷贝&quot;&gt;&lt;/a&gt;描述 : 递归实现深拷贝&lt;/h4&gt;&lt;p&gt;之前写过一个简易的数组(对象)的深拷贝方法，使用时较为繁琐的是得首先判断原数据是 &lt;code&gt;array&lt;/code&gt; 还是 &lt;code&gt;object&lt;/code&gt; ； 本方法采用递归的方式一一复制原数据里边的内容&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; deepCopy(destination, &lt;span class=&quot;built_in&quot;&gt;source&lt;/span&gt;) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (var p &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;source&lt;/span&gt;) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (getType(&lt;span class=&quot;built_in&quot;&gt;source&lt;/span&gt;[p]) == &lt;span class=&quot;string&quot;&gt;&quot;array&quot;&lt;/span&gt; || getType(&lt;span class=&quot;built_in&quot;&gt;source&lt;/span&gt;[p]) == &lt;span class=&quot;string&quot;&gt;&quot;object&quot;&lt;/span&gt;) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            destination[p] = getType(&lt;span class=&quot;built_in&quot;&gt;source&lt;/span&gt;[p]) == &lt;span class=&quot;string&quot;&gt;&quot;array&quot;&lt;/span&gt; ? [] : &amp;#123;&amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            arguments.callee(destination[p], &lt;span class=&quot;built_in&quot;&gt;source&lt;/span&gt;[p]);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; destination[p] = &lt;span class=&quot;built_in&quot;&gt;source&lt;/span&gt;[p];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;变量&lt;code&gt;destination&lt;/code&gt; 使用引用的方式带出最终的拷贝结果，使用时，&lt;code&gt;destination&lt;/code&gt;的数据类型要和原数据 &lt;code&gt;source&lt;/code&gt; 保持一致。  &lt;/p&gt;
+&lt;h4 id=&quot;使用方式&quot;&gt;&lt;a href=&quot;#使用方式&quot; class=&quot;headerlink&quot; title=&quot;使用方式 :&quot;&gt;&lt;/a&gt;使用方式 :&lt;/h4&gt;&lt;figure class=&quot;highlight stata&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; src = [1, 2, a: [1, 2]&amp;#125;];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;des&lt;/span&gt; = getType(src) == &lt;span class=&quot;string&quot;&gt;&quot;array&quot;&lt;/span&gt; ? [] : &amp;#123;&amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;deepCopy(&lt;span class=&quot;keyword&quot;&gt;des&lt;/span&gt;, src);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;console.&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;des&lt;/span&gt;);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;getType-的实现方式：&quot;&gt;&lt;a href=&quot;#getType-的实现方式：&quot; class=&quot;headerlink&quot; title=&quot;getType 的实现方式：&quot;&gt;&lt;/a&gt;getType 的实现方式：&lt;/h4&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;getType&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;o&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; _t = &lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;, _s = &lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 当数据属于 Object 超类的时候,再分析其具体类型&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ((_t = &lt;span class=&quot;keyword&quot;&gt;typeof&lt;/span&gt;(o)) == &lt;span class=&quot;string&quot;&gt;&quot;object&quot;&lt;/span&gt;) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// 若是 null 类型,则直接返回 null&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (o == &lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;) _s = &lt;span class=&quot;string&quot;&gt;&#39;null&#39;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// Object.prototype.toString.call(o) 返回类似 [object Array] 信息&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// 获取数据的具体类型, 截取类似 [object Array] 中的 Array, 以明确具体类型&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; _s = &lt;span class=&quot;built_in&quot;&gt;Object&lt;/span&gt;.prototype.toString.call(o).slice(&lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;-1&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; _s = _t;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; _s.toLowerCase();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;也可以采用操作符的优先级规则对以上代码进行简写:&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;getType&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;o&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; _t = &lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; ((_t = &lt;span class=&quot;keyword&quot;&gt;typeof&lt;/span&gt;(o)) == &lt;span class=&quot;string&quot;&gt;&quot;object&quot;&lt;/span&gt; ? o == &lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt; &amp;amp;&amp;amp; &lt;span class=&quot;string&quot;&gt;&quot;null&quot;&lt;/span&gt; || &lt;span class=&quot;built_in&quot;&gt;Object&lt;/span&gt;.prototype.toString.call(o).slice(&lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;-1&lt;/span&gt;) : _t).toLowerCase();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;PS-若是只想对一维数组进行拷贝可直接使用-arr-slice-0-方法，arr-为待拷贝的数组&quot;&gt;&lt;a href=&quot;#PS-若是只想对一维数组进行拷贝可直接使用-arr-slice-0-方法，arr-为待拷贝的数组&quot; class=&quot;headerlink&quot; title=&quot;PS : 若是只想对一维数组进行拷贝可直接使用 arr.slice(0) 方法，arr 为待拷贝的数组&quot;&gt;&lt;/a&gt;PS : 若是只想对一维数组进行拷贝可直接使用 &lt;code&gt;arr.slice(0)&lt;/code&gt; 方法，&lt;code&gt;arr&lt;/code&gt; 为待拷贝的数组&lt;/h4&gt;&lt;h1 id=&quot;以下是针对对象的深拷贝&quot;&gt;&lt;a href=&quot;#以下是针对对象的深拷贝&quot; class=&quot;headerlink&quot; title=&quot;以下是针对对象的深拷贝&quot;&gt;&lt;/a&gt;以下是针对对象的深拷贝&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;上面探讨的大多是针对 Array 或是 Object ( 针对于 JSON ) 的深拷贝方式, 下面我们探讨下如何对一个对象 ( Object ) 进行深拷贝&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;深拷贝的先决条件-：&quot;&gt;&lt;a href=&quot;#深拷贝的先决条件-：&quot; class=&quot;headerlink&quot; title=&quot;深拷贝的先决条件 ：&quot;&gt;&lt;/a&gt;深拷贝的先决条件 ：&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;对于任何对象，它可能的类型有 Boolean, Number, Date, String, RegExp, Array, Object&lt;/li&gt;
+&lt;li&gt;我们需要保存对象的构造函数信息，从而使新的对象可以使用 prototype 上的函数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;underScore-js-中的拷贝方式&quot;&gt;&lt;a href=&quot;#underScore-js-中的拷贝方式&quot; class=&quot;headerlink&quot; title=&quot;underScore.js 中的拷贝方式&quot;&gt;&lt;/a&gt;underScore.js 中的拷贝方式&lt;/h2&gt;&lt;figure class=&quot;highlight coq&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;_&lt;/span&gt;.clone = function(obj) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (!&lt;span class=&quot;keyword&quot;&gt;_&lt;/span&gt;.isObject(obj)) &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; obj;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;_&lt;/span&gt;.isArray(obj) ? obj.slice() : &lt;span class=&quot;keyword&quot;&gt;_&lt;/span&gt;.extend(&amp;#123;&amp;#125;, obj);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;严格来说，underScore 中的拷贝方式只能称之为浅拷贝 ( shallow-copy )，因为对于数组的拷贝部分&lt;code&gt;slice()&lt;/code&gt; 函数只能拷贝一位数组，数组中若有嵌套定义，则嵌套部分仍为引用关系。故而若有高维数组的拷贝需求，请使用以上自己编写的 &lt;code&gt;deepCopy&lt;/code&gt;函数&lt;/p&gt;
+&lt;h2 id=&quot;jquery-js-中的拷贝方式&quot;&gt;&lt;a href=&quot;#jquery-js-中的拷贝方式&quot; class=&quot;headerlink&quot; title=&quot;jquery.js 中的拷贝方式&quot;&gt;&lt;/a&gt;jquery.js 中的拷贝方式&lt;/h2&gt;&lt;figure class=&quot;highlight oxygene&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; src = &lt;span class=&quot;comment&quot;&gt;&amp;#123;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    a: [1, 2, &amp;#123;a: 1&amp;#125;],&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    b: &lt;span class=&quot;comment&quot;&gt;&amp;#123;a: [1, 2, 3]&amp;#125;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// shallow copy&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; x = $.extend(&lt;span class=&quot;comment&quot;&gt;&amp;#123;&amp;#125;&lt;/span&gt;, src);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// deep copy&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; y = $.extend(&lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;, &lt;span class=&quot;comment&quot;&gt;&amp;#123;&amp;#125;&lt;/span&gt;, src);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;x.b.a === y.b.a  &lt;span class=&quot;comment&quot;&gt;// false&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;jquery 中的 &lt;code&gt;extend()&lt;/code&gt;方法，原本是为了给某个对象拓展方法或是属性，这里我们讨巧一下，给一个空的对象 &lt;code&gt;{}&lt;/code&gt;，然后把待拷贝的对象的信息扩展给这个空对象, 就完成了拷贝。值得注意的是，&lt;code&gt;extend()&lt;/code&gt;函数的第一个参数为 &lt;code&gt;true&lt;/code&gt; 时，为深拷贝，否则默认为浅拷贝&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;为了防止变量被污染，我们需要对对象（或数组）进行拷贝，由于JS不像 C 等高级语言一般，可以指定传值或是传地址，故而我们需要对 JS 手工扩展深拷贝的方法&lt;br&gt;
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://yoursite.com/categories/javascript/"/>
+    
+    
+      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS 零碎知识点初步整理</title>
+    <link href="http://yoursite.com/2016/07/18/CSS-%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86%E7%82%B9%E5%88%9D%E6%AD%A5%E6%95%B4%E7%90%86/"/>
+    <id>http://yoursite.com/2016/07/18/CSS-零碎知识点初步整理/</id>
+    <published>2016-07-18T02:07:27.000Z</published>
+    <updated>2016-07-18T02:20:19.762Z</updated>
+    
+    <content type="html">&lt;p&gt;7月18日，周一晴，天朗气清，惠风和畅。做前端工作也快将近一年了，平素里积累了一些但是却又不够系统，也许是笔记做的少了些许。清晨，乘着心情尚好，略微整理一下，以慰去年的遗憾&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对WEB标准以及W3C的理解与认识&lt;ul&gt;
+&lt;li&gt;标签闭合、标签小写、不乱嵌套、提高搜索机器人搜索几率&lt;/li&gt;
+&lt;li&gt;使用外链css和js脚本、结构行为表现的分离、文件下载与页面速度更快&lt;/li&gt;
+&lt;li&gt;内容能被更多的用户所访问、内容能被更广泛的设备所访问、更少的代码和组件&lt;/li&gt;
+&lt;li&gt;提供打印版本而不需要复制内容、提高网站易用性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;xhtml和html有什么区别  &lt;ul&gt;
+&lt;li&gt;HTML是一种基本的WEB网页设计语言，XHTML是一个基于XML的置标语言&lt;/li&gt;
+&lt;li&gt;XHTML 元素必须被正确地嵌套&lt;/li&gt;
+&lt;li&gt;XHTML 元素必须被关闭&lt;/li&gt;
+&lt;li&gt;XHTML 标签名必须用小写字母&lt;/li&gt;
+&lt;li&gt;XHTML 文档必须拥有根元素&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Doctype? 严格模式与混杂模式-如何触发这两种模式，区分它们有何意义&lt;ul&gt;
+&lt;li&gt;用于声明文档使用那种规范（html/Xhtml）一般为 ：严格 、过度、基于框架的html文档&lt;/li&gt;
+&lt;li&gt;加入XMl声明可触发，解析方式更改为IE5.5拥有IE5.5的bug&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;行内元素有哪些？块级元素有哪些？CSS的盒模型？&lt;ul&gt;
+&lt;li&gt;块级元素：div p h1 h2 h3 h4 form ul &lt;/li&gt;
+&lt;li&gt;行内元素：a b br i span input select &lt;/li&gt;
+&lt;li&gt;CSS盒模型：内容，border,margin，padding&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;CSS引入的方式有哪些? link和@import的区别是?  &lt;ul&gt;
+&lt;li&gt;引入方式：内联、内嵌、外链、导入&lt;/li&gt;
+&lt;li&gt;link和@import区别 ：&lt;ul&gt;
+&lt;li&gt;同时加载&lt;/li&gt;
+&lt;li&gt;前者无兼容性，后者CSS2.1以下浏览器不支持&lt;/li&gt;
+&lt;li&gt;Link支持使用javascript改变样式，后者不可&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;CSS选择符有哪些？哪些属性可以继承？优先级算法如何计算？内联和important哪个优先级高？&lt;ul&gt;
+&lt;li&gt;选择符：标签选择符、类选择符、id选择符&lt;/li&gt;
+&lt;li&gt;继承不如指定 Id &amp;gt; class &amp;gt; 标签选择&lt;/li&gt;
+&lt;li&gt;内联和important优先级哪个高：important优先级高&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;写出几种IE6 BUG的解决方法  &lt;ul&gt;
+&lt;li&gt;双边距BUG：float引起的，可以使用display&lt;/li&gt;
+&lt;li&gt;像素问题：使用float引起的，使用dislpay:inline -3px;&lt;/li&gt;
+&lt;li&gt;超链接hover点击后失效：使用正确的书写顺序 linkvisited hover activen &lt;/li&gt;
+&lt;li&gt;IE z-index问题：给父级添加position:relative&lt;/li&gt;
+&lt;li&gt;PNG 透明：使用js代码改&lt;/li&gt;
+&lt;li&gt;min-height 最小高度 !important 解决&lt;/li&gt;
+&lt;li&gt;select 在ie6下遮盖：使用iframe嵌套&lt;/li&gt;
+&lt;li&gt;为什么没有办法定义1px左右的宽度容器(IE6默认的行高造成的，使用over:hidden,zoom:0.08line-height:1px)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;描述css reset的作用和用途&lt;ul&gt;
+&lt;li&gt;css reset的作用：Reset重置浏览器的css默认属性&lt;/li&gt;
+&lt;li&gt;用途：浏览器的品种不同，样式不同，然后重置，让他们统一&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;浏览器标准模式和怪异模式之间的区别是什么&lt;ul&gt;
+&lt;li&gt;盒子模型 渲染模式的不同&lt;/li&gt;
+&lt;li&gt;使用window.top.document.compatMode 可显示为什么模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;你如何对网站的文件和资源进行优化？期待的解决方案包括:&lt;ul&gt;
+&lt;li&gt;文件合并&lt;/li&gt;
+&lt;li&gt;文件最小化/文件压缩&lt;/li&gt;
+&lt;li&gt;使用CDN托管&lt;/li&gt;
+&lt;li&gt;缓存的使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;解决浏览器下标签之间空隐藏的空白字符问题&lt;ul&gt;
+&lt;li&gt;font-size : 0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;7月18日，周一晴，天朗气清，惠风和畅。做前端工作也快将近一年了，平素里积累了一些但是却又不够系统，也许是笔记做的少了些许。清晨，乘着心情尚好，略微整理一下，以慰去年的遗憾&lt;br&gt;
+    
+    </summary>
+    
+      <category term="css" scheme="http://yoursite.com/categories/css/"/>
+    
+    
+      <category term="css" scheme="http://yoursite.com/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>javascript 洗牌算法</title>
+    <link href="http://yoursite.com/2016/07/15/javascript-%E6%B4%97%E7%89%8C%E7%AE%97%E6%B3%95/"/>
+    <id>http://yoursite.com/2016/07/15/javascript-洗牌算法/</id>
+    <published>2016-07-15T06:43:29.000Z</published>
+    <updated>2016-07-18T08:21:32.709Z</updated>
+    
+    <content type="html">&lt;p&gt;导语:  Fisher–Yates Shuffle ： 有时我们需要打乱一个数组，即为数组乱序，也称洗牌算法，以下记录一些常用的洗牌算法&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;一，-准备工作&quot;&gt;&lt;a href=&quot;#一，-准备工作&quot; class=&quot;headerlink&quot; title=&quot;一， 准备工作&quot;&gt;&lt;/a&gt;一， 准备工作&lt;/h3&gt;&lt;p&gt;~~ 1.5 ; 1.5 &amp;lt;&amp;lt; 0 ; 1.5 &amp;gt;&amp;gt; 0 ; parseInt(1.5) 皆为对数字进行取整&lt;/p&gt;
+&lt;h3 id=&quot;二，洗牌算法&quot;&gt;&lt;a href=&quot;#二，洗牌算法&quot; class=&quot;headerlink&quot; title=&quot;二，洗牌算法&quot;&gt;&lt;/a&gt;二，洗牌算法&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt; 时间复杂度 o ( n^2 )&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight maxima&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;function shuffle(a) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;var&lt;/span&gt; b = [];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; (a.&lt;span class=&quot;built_in&quot;&gt;length&lt;/span&gt;) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;var&lt;/span&gt; index = ~~(Math.&lt;span class=&quot;built_in&quot;&gt;random&lt;/span&gt;() * a.&lt;span class=&quot;built_in&quot;&gt;length&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        b.&lt;span class=&quot;built_in&quot;&gt;push&lt;/span&gt;(a[index]);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        a.&lt;span class=&quot;built_in&quot;&gt;splice&lt;/span&gt;(index, &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; b;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt; 近似快速实现的算法&lt;br&gt; 时间复杂度 o ( log(n) )&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;shuffle&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;a&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; a.concat().sort(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;a, b&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Math&lt;/span&gt;.random() - &lt;span class=&quot;number&quot;&gt;0.5&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt; underscore中的实现, Fisher–Yates Shuffle 算法&lt;br&gt; 时间复杂度 o(n)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight perl&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;_&lt;/span&gt;.shuffle = function (obj) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    var set = isArrayLike(obj) ? obj : &lt;span class=&quot;number&quot;&gt;_&lt;/span&gt;.values(obj);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    var &lt;span class=&quot;keyword&quot;&gt;length&lt;/span&gt; = set.length;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    var shuffled = Array(&lt;span class=&quot;keyword&quot;&gt;length&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (var &lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;rand&lt;/span&gt;; &lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt; &amp;lt; &lt;span class=&quot;keyword&quot;&gt;length&lt;/span&gt;; &lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt;++) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;rand&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;_&lt;/span&gt;.random(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;rand&lt;/span&gt; !== &lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt;) shuffled[&lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt;] = shuffled[&lt;span class=&quot;keyword&quot;&gt;rand&lt;/span&gt;];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        shuffled[&lt;span class=&quot;keyword&quot;&gt;rand&lt;/span&gt;] = set[&lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt;];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; shuffled;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt; Fisher–Yates Shuffle 算法&lt;br&gt; 实现复杂度为: o ( n )&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight perl&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;function shuffle(a) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    var &lt;span class=&quot;keyword&quot;&gt;length&lt;/span&gt; = a.length;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    var shuffled = Array(&lt;span class=&quot;keyword&quot;&gt;length&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (var &lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;rand&lt;/span&gt;; &lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt; &amp;lt; &lt;span class=&quot;keyword&quot;&gt;length&lt;/span&gt;; &lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt;++) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;rand&lt;/span&gt; = ~~(Math.random() * (&lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt; + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;));&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;rand&lt;/span&gt; !== &lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt;) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            shuffled[&lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt;] = shuffled[&lt;span class=&quot;keyword&quot;&gt;rand&lt;/span&gt;];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        shuffled[&lt;span class=&quot;keyword&quot;&gt;rand&lt;/span&gt;] = a[&lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt;];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; shuffled;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;随机性的数学归纳法证明&quot;&gt;&lt;a href=&quot;#随机性的数学归纳法证明&quot; class=&quot;headerlink&quot; title=&quot;随机性的数学归纳法证明&quot;&gt;&lt;/a&gt;随机性的数学归纳法证明&lt;/h3&gt;&lt;p&gt;对 n 个数进行随机  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;首先我们考虑 n = 2 的情况，根据算法，显然有 1/2 的概率两个数交换，有 1/2 的概率两个数不交换，因此对 n = 2 的情况，元素出现在每个位置的概率都是 1/2，满足随机性要求。&lt;/li&gt;
+&lt;li&gt;假设有 i 个数， i &amp;gt;= 2 时，算法随机性符合要求，即每个数出现在 i 个位置上每个位置的概率都是 1/i。&lt;/li&gt;
+&lt;li&gt;对于 i + 1 个数，按照我们的算法，在第一次循环时，每个数都有 1/(i+1) 的概率被交换到最末尾，所以每个元素出现在最末一位的概率都是 1/(i+1) 。而每个数也都有 i/(i+1) 的概率不被交换到最末尾，如果不被交换，从第二次循环开始还原成 i 个数随机，根据 2. 的假设，它们出现在 i 个位置的概率是 1/i。因此每个数出现在前 i 位任意一位的概率是 (i/(i+1)) * (1/i) = 1/(i+1)，也是 1/(i+1)。&lt;/li&gt;
+&lt;li&gt;综合 1. 2. 3. 得出，对于任意 n &amp;gt;= 2，经过这个算法，每个元素出现在 n 个位置任意一个位置的概率都是 1/n。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;小结&quot;&gt;&lt;a href=&quot;#小结&quot; class=&quot;headerlink&quot; title=&quot;小结&quot;&gt;&lt;/a&gt;小结&lt;/h2&gt;&lt;p&gt;关于数组乱序，不要用 Math.random() 实现&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;导语:  Fisher–Yates Shuffle ： 有时我们需要打乱一个数组，即为数组乱序，也称洗牌算法，以下记录一些常用的洗牌算法&lt;br&gt;
+    
+    </summary>
+    
+      <category term="算法" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>类数组 Array-Like Objects 初探</title>
+    <link href="http://yoursite.com/2016/07/15/array-like/"/>
+    <id>http://yoursite.com/2016/07/15/array-like/</id>
+    <published>2016-07-15T02:50:49.000Z</published>
+    <updated>2016-07-15T05:39:22.618Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;Array-Like&quot;&gt;&lt;a href=&quot;#Array-Like&quot; class=&quot;headerlink&quot; title=&quot;Array-Like&quot;&gt;&lt;/a&gt;Array-Like&lt;/h2&gt;&lt;p&gt;javascript 中一切皆为对象，Array-Like 顾名思义就是类数组对象，和数组一样可以使用 &lt;code&gt;[]&lt;/code&gt; 操作符访问，有&lt;code&gt;length&lt;/code&gt;属性，但是没有数组的部分内置方法，譬如 push 、pop 等，最常见的类数组对象便是函数形参的 arguments&lt;/p&gt;
+&lt;p&gt;那么，什么样的元素是 Array-Like Objects？  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;以下是 Javascript 权威指南上对它的定义&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;isArrayLike&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;o&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (o &amp;amp;&amp;amp;                                  &lt;span class=&quot;comment&quot;&gt;// o 是非 null, undefined 等&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;typeof&lt;/span&gt; o === &lt;span class=&quot;string&quot;&gt;&#39;object&#39;&lt;/span&gt; &amp;amp;&amp;amp;              &lt;span class=&quot;comment&quot;&gt;// o 是对象&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;isFinite&lt;/span&gt;(o.length) &amp;amp;&amp;amp;                 &lt;span class=&quot;comment&quot;&gt;// o.length 是有限数值&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        o.length &amp;gt;= &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; &amp;amp;&amp;amp;                      &lt;span class=&quot;comment&quot;&gt;// o.length 是非负值&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        o.length === &lt;span class=&quot;built_in&quot;&gt;Math&lt;/span&gt;.floor(o.length) &amp;amp;&amp;amp;  &lt;span class=&quot;comment&quot;&gt;// o.length 是整数&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        o.length &amp;lt; &lt;span class=&quot;built_in&quot;&gt;Math&lt;/span&gt;.pow(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;32&lt;/span&gt;))           &lt;span class=&quot;comment&quot;&gt;// 0.length &amp;lt; 2^32&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;;                        &lt;span class=&quot;comment&quot;&gt;// 否则它不是&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;以上是对类数组的严格定义，以下是 underscore 中对类数组的定义:  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight qml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;var&lt;/span&gt; MAX_ARRAY_INDEX = &lt;span class=&quot;built_in&quot;&gt;Math&lt;/span&gt;.pow(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;53&lt;/span&gt;) - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;var&lt;/span&gt; getLength = &lt;span class=&quot;keyword&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;(&#39;length&#39;)&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;var&lt;/span&gt; isArrayLike = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;collection&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;var&lt;/span&gt; length = getLength(collection);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;typeof&lt;/span&gt; length == &lt;span class=&quot;string&quot;&gt;&#39;number&#39;&lt;/span&gt; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;amp;&amp;amp; length &amp;gt;= &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;amp;&amp;amp; length &amp;lt;= MAX_ARRAY_INDEX;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;很简单，不是数组，但是有 length 属性，且属性值为非负 Number 类型即可。至于 length 属性的值，underscore 给出了一个上限值 MAX_ARRAY_INDEX, 这是 javascript 中所能表示的最大数字。  &lt;/p&gt;
+&lt;h4 id=&quot;想想还有什么同时能满足以上条件的？NodeList，HTML-Collections，仔细想想，甚至还有字符串，或者拥有-length-属性的对象，函数（length-属性值为形参数量），等等。&quot;&gt;&lt;a href=&quot;#想想还有什么同时能满足以上条件的？NodeList，HTML-Collections，仔细想想，甚至还有字符串，或者拥有-length-属性的对象，函数（length-属性值为形参数量），等等。&quot; class=&quot;headerlink&quot; title=&quot;想想还有什么同时能满足以上条件的？NodeList，HTML Collections，仔细想想，甚至还有字符串，或者拥有 length 属性的对象，函数（length 属性值为形参数量），等等。&quot;&gt;&lt;/a&gt;想想还有什么同时能满足以上条件的？NodeList，HTML Collections，仔细想想，甚至还有字符串，或者拥有 length 属性的对象，函数（length 属性值为形参数量），等等。&lt;/h4&gt;&lt;h2 id=&quot;Array-Like-to-Array&quot;&gt;&lt;a href=&quot;#Array-Like-to-Array&quot; class=&quot;headerlink&quot; title=&quot;Array-Like to Array&quot;&gt;&lt;/a&gt;Array-Like to Array&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;有的时候我们需要把 Array-Like Objects 转化为 Array 使之能使用数组的一些方法，以下是一些 Array-Like to Array 的转化方法&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;第一种最简单粗暴，直接新建一个数组，然后把类数组里边的元素一个一个赋值给临时数组，并返回临时数组&lt;/p&gt;
+  &lt;figure class=&quot;highlight matlab&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;toArray&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(array_like)&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    var tmp = [];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (var &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; &amp;lt; array_like.&lt;span class=&quot;built_in&quot;&gt;length&lt;/span&gt;; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt;++) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        tmp[i] = array_like[i];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; tmp;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;但这不是最优雅的，我们可以用数组内置的方法来实现&lt;/p&gt;
+  &lt;figure class=&quot;highlight ada&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;toArray&lt;/span&gt;(array_like) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;Array.prototype.slice.call(array_like)&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;我们也可以用 &lt;code&gt;[]&lt;/code&gt; 来代替 Array.prototype 这样可以省几个字节，但是 &lt;code&gt;[]&lt;/code&gt; 会首先创建一个空数组，效率方便不及前者。&lt;/p&gt;
+  &lt;figure class=&quot;highlight ada&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;toArray&lt;/span&gt;(array_like) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;[].slice.call(array_like)&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为什么这样可以转换？我们简单了解下，主要的原因是 slice 方法只需要参数有 length 属性即可。首先，slice 方法得到的结果是一个 新的数组，通过 Array.prototype.slice.call 传入的参数（假设为 a），如果没有 length 属性，或者 length 属性值不是 Number 类型，或者为负，那么直接返回一个空数组，否则返回 a[0]-a[length-1] 组成的数组 &lt;a href=&quot;https://github.com/v8/v8/blob/master/src/js/array.js#L621-L660&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;具体可以参考V8源代码&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;ES6 中给予了我们额外的 Array-Like to Array 的方式&lt;/p&gt;
+  &lt;figure class=&quot;highlight sqf&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var &lt;span class=&quot;built_in&quot;&gt;str&lt;/span&gt; = &lt;span class=&quot;string&quot;&gt;&quot;helloworld&quot;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;var arr = &lt;span class=&quot;built_in&quot;&gt;Array&lt;/span&gt;.&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt;(&lt;span class=&quot;built_in&quot;&gt;str&lt;/span&gt;);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;compatibility&quot;&gt;&lt;a href=&quot;#compatibility&quot; class=&quot;headerlink&quot; title=&quot;compatibility&quot;&gt;&lt;/a&gt;compatibility&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;IE 下 Array.prototype.slice.call(nodes) 会抛出错误 (because a DOM NodeList is not a JavaScript object）所以我们需要手动处理兼容性问题&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;toArray&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;array_like&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; res = [];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        res = &lt;span class=&quot;built_in&quot;&gt;Array&lt;/span&gt;.prototype.slice.call(array_like);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; res;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125; &lt;span class=&quot;keyword&quot;&gt;catch&lt;/span&gt; (err) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        res = [];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, length = array_like.length; i &amp;lt; length; i++) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            res.push(array_like[i]);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; res;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;Others&quot;&gt;&lt;a href=&quot;#Others&quot; class=&quot;headerlink&quot; title=&quot;Others&quot;&gt;&lt;/a&gt;Others&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;数组的一些内置方法也可以接受类数组作为实参&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight maxima&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;var&lt;/span&gt; obj = &amp;#123;&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;, &lt;span class=&quot;built_in&quot;&gt;length&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;&amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;var&lt;/span&gt; arr = [&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Array.prototype.&lt;span class=&quot;built_in&quot;&gt;push&lt;/span&gt;.&lt;span class=&quot;built_in&quot;&gt;apply&lt;/span&gt;(arr, obj);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;console.&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(arr); // [&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;, undefined]&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Array-Like&quot;&gt;&lt;a href=&quot;#Array-Like&quot; class=&quot;headerlink&quot; title=&quot;Array-Like&quot;&gt;&lt;/a&gt;Array-Like&lt;/h2&gt;&lt;p&gt;javascript 中一切皆为对象，Array-Like 顾名思义就是类数
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://yoursite.com/categories/javascript/"/>
+    
+    
+      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>愿无岁月可回首</title>
+    <link href="http://yoursite.com/2016/06/25/%E6%84%BF%E6%97%A0%E5%B2%81%E6%9C%88%E5%8F%AF%E5%9B%9E%E9%A6%96/"/>
+    <id>http://yoursite.com/2016/06/25/愿无岁月可回首/</id>
+    <published>2016-06-25T09:02:04.000Z</published>
+    <updated>2016-07-27T07:27:49.066Z</updated>
+    
+    <content type="html">&lt;p&gt;&amp;emsp;&amp;emsp;慢慢地发现，做技术的时间越长，内心的世界逐渐狼藉起来，像四月的蒲公英，成群结队地飞舞在空中。虽纯白如雪却始终不知归处。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;&amp;emsp;&amp;emsp;斑驳的记忆中，旖旎的大学时代已经从手中偷偷溜走，没有任何预告和征兆，算来已经快将近一年了。不知道大一时候偷偷种在药园的那颗苹果树是否依旧坚韧地活着，之前行程太急，匆忙之间竟也忘记在回首母校时去看望它一眼。&lt;br&gt;&amp;emsp;&amp;emsp;时间会让人麻木，准确的说是一成不变的生活会让人麻木。作为一个神经极其大条的我买说，平素里并无什么让我感到恐惧的东西，除了时间。看着春夏更替的愈来愈快，就愈加拼命地想要抓住以往的时光，但是当踮起脚尖去够的时候，时光却总是把我无情地向前拉，顽固不化地推着我。被迫感受春花秋实，世事流转的物哀。&lt;br&gt;&amp;emsp;&amp;emsp;曾记得大四实习那会，以一颗感性的心，和大家一一惜别。宿舍门前的樱花刚开过一季，趁着剩下不多的时间，留了几颗樱桃的种子。组团的猫也开始宣誓它们喵星人的地位，开始咀嚼那些掉落的樱桃。提起猫，说来也奇怪，都聚集在了男生组团，还常常为了樱桃打架，看着这一幕和谐的场景，我离开了校园&lt;br&gt;&amp;emsp;&amp;emsp;其实我是舍不得离开的，当初是高考砸了来了南京，如今临走之际，却很难挪开脚步。不知道要怎么样才会对一个城市有如此情愫，恬淡，落落，好比一滴泪落入江河里，才能明白那种淡而不化的心情。蓦然发现也许我们爱上一座城，是因为那里有一个我们深爱的人。&lt;br&gt;&amp;emsp;&amp;emsp;我喜欢诗意的生活，就好比我喜欢新闻和阅读一般，至于为什么会走上编程的路，我想大抵是抱着一种拯救国人理性思维的崇高理想而去的。世界的很多东西是不确定的，但是总有不变的东西。比如我喜欢数学的理由竟然是三角形的内角和是180度这么一个简单的定理。觉得这使我在一个不确定的世界中看到了一个绝对世界的存在。就像我喜欢编程，因为我觉得计算机不像自然界那般鬼魅多变，变量都是可控的。可我却也不喜欢如此固化的事情，总之很矛盾，既感性又理性，一度以为自己精神分裂。&lt;br&gt;&amp;emsp;&amp;emsp;随着自己的日渐麻木，发现话都不会说了，曾经文笔还可以的我现在通篇看下来都快成了流水账，写到哪里算是哪里，就像我的心情一样。不过这是个好兆头，我觉得。&lt;br&gt;&amp;emsp;&amp;emsp;随性而活，随遇而安，我想是时候找回真实的自己，诗意地活着，愿无岁月可回首，不后悔，便好&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;&amp;emsp;慢慢地发现，做技术的时间越长，内心的世界逐渐狼藉起来，像四月的蒲公英，成群结队地飞舞在空中。虽纯白如雪却始终不知归处。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="心情" scheme="http://yoursite.com/tags/%E5%BF%83%E6%83%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>清明寒食</title>
+    <link href="http://yoursite.com/2016/04/05/%E6%B8%85%E6%98%8E/"/>
+    <id>http://yoursite.com/2016/04/05/清明/</id>
+    <published>2016-04-05T06:03:30.000Z</published>
+    <updated>2016-07-26T09:04:44.890Z</updated>
+    
+    <content type="html">&lt;p&gt;&amp;emsp;&amp;emsp;人世几回伤往事，山形依旧枕寒流，夜半坐起，拂去衣上寒意，推门开去，静待天明。&lt;br&gt;&amp;emsp;&amp;emsp;月色深重，想来必是海涛对岸游子的歌声和天河之上相守的恋人汇聚凝结。天空中寒杂着小雨，细雨湿衣相伴的除了晚归的亲人还有破晓前街门口路灯橙黄色的光晕。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;&amp;emsp;&amp;emsp;前些周去看望了下鸡鸣寺的樱花，观景之人正盛，正似落樱如雨的姹紫嫣红。当年笃信佛家的梁武帝建寺之时，是否可曾想到，被杜牧批驳的四百八十寺如今却依旧稀稀落落站立在风雨中，站立在江南的烟波浩渺和人们的思念里。时光荏苒，从求长生到如今父母孩子相聚游玩，恋人青涩相守，友人相遇重逢，其实信仰一直都在。&lt;br&gt;&amp;emsp;&amp;emsp;清明寒食尚有半月，从南京回来家中便开始折纸钱了，儿时少不更事，觉得叠元宝太过俗气，紫金亭确实不错，色泽红润，甚至可爱。时常搬个小板凳，坐在屋檐下，阳光透过窗沿的缝隙洒下来，当叠的所有紫金亭都被照亮时，太阳下山，家里的猫儿也从檐上跳下来算是回家了。听奶奶说，红色的紫金厅叠的人不多，但虽是清明毕竟曾经相守过，如今清明时节，阎王老爷放亲人归家，相聚自然得喜庆一些，不然哭哭啼啼的也叫长辈了看了伤心不是。相逢便是缘分，更何况相守了一段岁月。&lt;br&gt;&amp;emsp;&amp;emsp;佛家讲究一个缘字，我一直相信很多事情时能经历时间的，从南梁飘落而来的樱花是，亲人的思念是，恋人的相逢是。念及此，武帝一生笃信佛理，相信缘起缘灭皆有因果，看到当初所建，成为如今大众情感所寄托，可安心已，清明寒食，有你一祭。&lt;br&gt;&amp;emsp;&amp;emsp;清秋之节临近，我时常扪心自问，抛开骨血亲情，其他最令人心动的情感是什么。&lt;br&gt;&amp;emsp;&amp;emsp;自然不是玫瑰花，不是钻戒，真正令人心动的是我们对此无限的遐想。好比故事一直没说过，但我知道你一定走了很远的路，吃过很多的苦才来到他面前吧，不然的话，他只不过多看了你一眼，你怎么眼眶就红了。我还知道，你也一定陪她走了很久很久，不然的话，她在角落里黯然一笑，你怎么就心碎了呢。&lt;br&gt;&amp;emsp;&amp;emsp;但愿我们都骨气勇气做一个不那么容易被感动的人，因为越是敏感的人，来的路便越苦楚。而这些我们都知道。&lt;br&gt;&amp;emsp;&amp;emsp;人生如参商，西东不得见。清明将至，清明节提供的不仅仅是吊念亲人，更要我们珍惜身边人。世间没有永恒不灭的生命，却有斩不断的人心&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;&amp;emsp;人世几回伤往事，山形依旧枕寒流，夜半坐起，拂去衣上寒意，推门开去，静待天明。&lt;br&gt;&amp;emsp;&amp;emsp;月色深重，想来必是海涛对岸游子的歌声和天河之上相守的恋人汇聚凝结。天空中寒杂着小雨，细雨湿衣相伴的除了晚归的亲人还有破晓前街门口路灯橙黄色的光晕。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="心情" scheme="http://yoursite.com/tags/%E5%BF%83%E6%83%85/"/>
+    
+  </entry>
+  
+</feed>

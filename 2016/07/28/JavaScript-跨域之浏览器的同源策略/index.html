@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="stay hungry stay foolish"><title>JavaScript 跨域(一)之浏览器的同源策略 | 愿无岁月可回首</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.1"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">JavaScript 跨域(一)之浏览器的同源策略</h1><a id="logo" href="/.">愿无岁月可回首</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">JavaScript 跨域(一)之浏览器的同源策略</h1><div class="post-meta">Jul 28, 2016<span> | </span><span class="category"><a href="/categories/javascript/">javascript</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><p>浏览器的安全基于同源策略(same-origin policy)，根据 MDN 中对于同源策略的解释，它限制了一个源(origin)中加载文本或脚本与来自其他源(origin)中资源的交互方式。此文主要介绍同源政策，为接下去探讨跨域的一系列方式做准备。</p>
+<h2 id="同源含义"><a href="#同源含义" class="headerlink" title="同源含义"></a>同源含义</h2><p>如果两个页面拥有相同的协议，端口（若指定），和主机，那么这两个页面就属于同一个源</p>
+<h3 id="同源指的三个相同"><a href="#同源指的三个相同" class="headerlink" title="同源指的三个相同"></a>同源指的三个相同</h3><ul>
+<li>协议相同（protocol）</li>
+<li>端口相同（如果指定）</li>
+<li>域名相同</li>
+</ul>
+<h3 id="端口协议域名解析："><a href="#端口协议域名解析：" class="headerlink" title="端口协议域名解析："></a>端口协议域名解析：</h3><h4 id="http-www-company-com-dir-page-html"><a href="#http-www-company-com-dir-page-html" class="headerlink" title="http://www.company.com/dir/page.html"></a><a href="http://www.company.com/dir/page.html" target="_blank" rel="external">http://www.company.com/dir/page.html</a></h4><ul>
+<li>协议是 http://</li>
+<li>域名是 www.company.com</li>
+<li>端口是 80 (未指定，默认)</li>
+</ul>
+<h3 id="同源策略的目的"><a href="#同源策略的目的" class="headerlink" title="同源策略的目的"></a>同源策略的目的</h3><p>同源政策是必须的，譬如 A 网站的 cookie 中含有敏感信息，用户若是访问 A 网站后再去访问其他网站，若是无同源政策，那么其他网站便可获取用户在A网站中的信息，此时若是恰好账号密码等敏感信息存于 cookie 中，此时便会有巨大的隐患。由此可见，”同源策略”是必需的，否则 Cookie 可以共享，互联网就毫无安全可言了。</p>
+<h3 id="同源策略的限制"><a href="#同源策略的限制" class="headerlink" title="同源策略的限制"></a>同源策略的限制</h3><p>虽然同源策略很有必要，但是随着互联网的发展，同源策略也越来越严格。目前如果非同源，会有下面三种行为受到限制。</p>
+<ul>
+<li>Cookie、LocalStorage 和 IndexDB 无法读取</li>
+<li>DOM 无法获得</li>
+<li>AJAX 请求不能发送</li>
+</ul>
+<h3 id="同源策略的例子"><a href="#同源策略的例子" class="headerlink" title="同源策略的例子"></a>同源策略的例子</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">URL</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">是否允许通讯</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="http://www.a.com/a.js" target="_blank" rel="external">http://www.a.com/a.js</a><br><a href="http://www.a.com/b.js" target="_blank" rel="external">http://www.a.com/b.js</a></td>
+<td style="text-align:left">同一域名下</td>
+<td style="text-align:left">允许</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.a.com/lab/a.js" target="_blank" rel="external">http://www.a.com/lab/a.js</a><br><a href="http://www.a.com/script/b.js" target="_blank" rel="external">http://www.a.com/script/b.js</a></td>
+<td style="text-align:left">同一域名下不同文件夹</td>
+<td style="text-align:left">允许</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.a.com:8000/a.js" target="_blank" rel="external">http://www.a.com:8000/a.js</a><br><a href="http://www.a.com/b.js" target="_blank" rel="external">http://www.a.com/b.js</a></td>
+<td style="text-align:left">同一域名，不同端口</td>
+<td style="text-align:left">不允许</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.a.com/a.js" target="_blank" rel="external">http://www.a.com/a.js</a><br><a href="https://www.a.com/b.js" target="_blank" rel="external">https://www.a.com/b.js</a></td>
+<td style="text-align:left">一域名，不同协议</td>
+<td style="text-align:left">不允许</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.a.com/a.js" target="_blank" rel="external">http://www.a.com/a.js</a><br><a href="http://192.168.199.1/b.js" target="_blank" rel="external">http://192.168.199.1/b.js</a></td>
+<td style="text-align:left">域名和域名对应ip</td>
+<td style="text-align:left">不允许</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.a.com/a.js" target="_blank" rel="external">http://www.a.com/a.js</a><br><a href="http://script.a.com/b.js" target="_blank" rel="external">http://script.a.com/b.js</a></td>
+<td style="text-align:left">主域相同，子域不同</td>
+<td style="text-align:left">不允许</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.a.com/a.js" target="_blank" rel="external">http://www.a.com/a.js</a><br><a href="http://a.com/b.js" target="_blank" rel="external">http://a.com/b.js</a></td>
+<td style="text-align:left">同一域名，不同二级域名（同上）</td>
+<td style="text-align:left">不允许（cookie这种情况下也不允许访问）</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.cnblogs.com/a.js" target="_blank" rel="external">http://www.cnblogs.com/a.js</a><br><a href="http://www.a.com/b.js" target="_blank" rel="external">http://www.a.com/b.js</a></td>
+<td style="text-align:left">不同域名</td>
+<td style="text-align:left">不允许</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PS-有两点比较特殊"><a href="#PS-有两点比较特殊" class="headerlink" title="PS:有两点比较特殊"></a>PS:有两点比较特殊</h4><ul>
+<li>如果是协议和端口造成的跨域问题无法在前端解决</li>
+<li>在跨域问题上，域仅仅是通过”URL的首部”来识别而不会去尝试判断相同的 ip 地址对应着两个域或两个域是否在同一个 ip 上, URL首部指的是：<code>window.location.protocol +window.location.host</code></li>
+</ul>
+<h3 id="同源的继承"><a href="#同源的继承" class="headerlink" title="同源的继承"></a>同源的继承</h3><p>来自about:blank，javascript:和data:URLs中的内容，继承了将其载入的文档所指定的源，因为它们的URL本身未指定任何关于自身源的信息</p>
+<h3 id="IE-的同源特例"><a href="#IE-的同源特例" class="headerlink" title="IE 的同源特例"></a>IE 的同源特例</h3><p>在处理同源策略的问题上，IE存在两个主要的不同之处</p>
+<ul>
+<li>授信范围（Trust Zones）：两个相互之间高度互信的域名，如公司域名（corporate domains），不遵守同源策略的限制。</li>
+<li>端口：IE未将端口号加入到同源策略的组成部分之中，<br>因此 <a href="http://company.com:81/index.html" target="_blank" rel="external">http://company.com:81/index.html</a> 和<a href="http://company.com/index.html" target="_blank" rel="external">http://company.com/index.html</a>  属于同源并且不受任何限制。</li>
+</ul>
+<p>这些例外是非标准的，其它浏览器也未做出支持，但会助于开发基于window RT IE的应用程序。</p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.1" async></script><a data-url="http://yoursite.com/2016/07/28/JavaScript-跨域之浏览器的同源策略/" data-id="cirbsgtci0005xvshrayj2rex" class="article-share-link">分享到</a><div class="tags"><a href="/tags/跨域/">跨域</a></div><div class="post-nav"><a href="/2016/07/29/JavaScript-跨域之JSONP/" class="pre">JavaScript 跨域(二)之 JSONP</a><a href="/2016/07/26/JavaScript-深拷贝/" class="next">JavaScript 深拷贝</a></div></div></div></div><div class="pure-u-1-4"><div id="sidebar"><div class="widget"><form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="search" name="word" maxlength="20" placeholder="Search"/><input type="hidden" name="si" value="http://yoursite.com"/><input name="tn" type="hidden" value="bds"/><input name="cl" type="hidden" value="3"/><input name="ct" type="hidden" value="2097152"/><input name="s" type="hidden" value="on"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">3</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/跨域/" style="font-size: 15px;">跨域</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/心情/" style="font-size: 15px;">心情</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/JavaScript-跨域之JSONP/">JavaScript 跨域(二)之 JSONP</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/JavaScript-跨域之浏览器的同源策略/">JavaScript 跨域(一)之浏览器的同源策略</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/26/JavaScript-深拷贝/">JavaScript 深拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/18/CSS-零碎知识点初步整理/">CSS 零碎知识点初步整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/15/javascript-洗牌算法/">javascript 洗牌算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/15/array-like/">类数组 Array-Like Objects 初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/25/愿无岁月可回首/">愿无岁月可回首</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/清明/">清明寒食</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.baidu.com/" title="百度" target="_blank">百度</a><ul></ul><a href="http://deerchao.net/tutorials/regex/regex.htm#mission" title="正则表达式教程" target="_blank">正则表达式教程</a><ul></ul><a href="http://www.duzhe.com/" title="读者" target="_blank">读者</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">愿无岁月可回首.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.1" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.1" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.1"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.1"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.1"></script></div></body></html>
