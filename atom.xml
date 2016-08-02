@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-01T08:37:31.727Z</updated>
+  <updated>2016-08-02T03:00:43.980Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>JavaScript 跨域(二)之 JSONP</title>
+    <title>JavaScript 跨域(二) 之 JSONP</title>
     <link href="http://yoursite.com/2016/07/29/JavaScript-%E8%B7%A8%E5%9F%9F%E4%B9%8BJSONP/"/>
     <id>http://yoursite.com/2016/07/29/JavaScript-跨域之JSONP/</id>
     <published>2016-07-29T03:39:40.000Z</published>
-    <updated>2016-08-01T08:37:31.727Z</updated>
+    <updated>2016-08-02T03:00:43.980Z</updated>
     
     <content type="html">&lt;p&gt;浏览器的同源策略在保障了我们的数据安全，但是在进行一些比较深入的前端编程的时候却略显苛刻。JSONP 的跨域 GET 请求是一个常用的解决方案，下面我们来看一下 JSONP 是如何实现的，并探讨下 JSONP 的跨域原理&lt;/p&gt;
 &lt;h2 id=&quot;JSONP-的定义&quot;&gt;&lt;a href=&quot;#JSONP-的定义&quot; class=&quot;headerlink&quot; title=&quot;JSONP 的定义&quot;&gt;&lt;/a&gt;JSONP 的定义&lt;/h2&gt;&lt;p&gt;Jsonp(JSON with Padding) 是 json 的一种”使用模式”，可以让网页从别的域名（网站）那获取资料，即跨域读取数据&lt;/p&gt;
@@ -54,11 +54,11 @@
   </entry>
   
   <entry>
-    <title>JavaScript 跨域(一)之浏览器的同源策略</title>
+    <title>JavaScript 跨域(一) 之浏览器的同源策略</title>
     <link href="http://yoursite.com/2016/07/28/JavaScript-%E8%B7%A8%E5%9F%9F%E4%B9%8B%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5/"/>
     <id>http://yoursite.com/2016/07/28/JavaScript-跨域之浏览器的同源策略/</id>
     <published>2016-07-28T02:54:35.000Z</published>
-    <updated>2016-08-01T08:37:49.306Z</updated>
+    <updated>2016-08-02T03:00:58.463Z</updated>
     
     <content type="html">&lt;p&gt;浏览器的安全基于同源策略(same-origin policy)，根据 MDN 中对于同源策略的解释，它限制了一个源(origin)中加载文本或脚本与来自其他源(origin)中资源的交互方式。此文主要介绍同源政策，为接下去探讨跨域的一系列方式做准备。&lt;/p&gt;
 &lt;h2 id=&quot;同源含义&quot;&gt;&lt;a href=&quot;#同源含义&quot; class=&quot;headerlink&quot; title=&quot;同源含义&quot;&gt;&lt;/a&gt;同源含义&lt;/h2&gt;&lt;p&gt;如果两个页面拥有相同的协议，端口（若指定），和主机，那么这两个页面就属于同一个源&lt;/p&gt;
