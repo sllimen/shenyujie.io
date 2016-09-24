@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-24T14:14:27.594Z</updated>
+  <updated>2016-09-24T15:09:03.315Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,29 +16,98 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Javascript 跨域之 WebSocket</title>
-    <link href="http://yoursite.com/2016/09/24/Javascript-%E8%B7%A8%E5%9F%9F%E4%B9%8B-WebSocket/"/>
-    <id>http://yoursite.com/2016/09/24/Javascript-跨域之-WebSocket/</id>
-    <published>2016-09-24T13:40:03.000Z</published>
-    <updated>2016-09-24T14:14:27.594Z</updated>
+    <title>Javascript 跨域(三)之 WebSocket</title>
+    <link href="http://yoursite.com/2016/08/01/Javascript-%E8%B7%A8%E5%9F%9F%E4%B9%8B-WebSocket/"/>
+    <id>http://yoursite.com/2016/08/01/Javascript-跨域之-WebSocket/</id>
+    <published>2016-08-01T13:40:03.000Z</published>
+    <updated>2016-09-24T15:09:03.315Z</updated>
     
-    <content type="html">&lt;p&gt;websocket 被称为 Web 领域的实时推送技术，也被称作为 Realtime 技术，有别于 ajax 轮询，它能实现真正意义上的实时消息推送，它有着广泛的应用场景，比如在线聊天室，web 客服或是 WebIM 等等。除此之外，我们还可用它来实现前端的跨域数据访问&lt;/p&gt;
+    <content type="html">&lt;p&gt;websocket 被称为 Web 领域的实时推送技术，也被称作为 Realtime 技术，有别于 ajax 轮询，它能实现真正意义上的实时消息推送，它有着广泛的应用场景，比如在线聊天室，web 客服或是 WebIM 等等。除此之外，我们还可用它来实现前端的跨域数据访问&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;以下使用-nodejs-实现一个简易的-WebSocket-服务器&quot;&gt;&lt;a href=&quot;#以下使用-nodejs-实现一个简易的-WebSocket-服务器&quot; class=&quot;headerlink&quot; title=&quot;以下使用 nodejs 实现一个简易的 WebSocket 服务器&quot;&gt;&lt;/a&gt;以下使用 nodejs 实现一个简易的 WebSocket 服务器&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;nodeJs version : v 6.5.0&lt;br&gt;system environment : windows 10 1607  &lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&quot;WebSocket-简介&quot;&gt;&lt;a href=&quot;#WebSocket-简介&quot; class=&quot;headerlink&quot; title=&quot;WebSocket 简介&quot;&gt;&lt;/a&gt;WebSocket 简介&lt;/h3&gt;&lt;p&gt;为了实现推送技术，通常采用的方式是轮询（Polling） 和 Comet 技术， Comet 技术又可细分为两种，一种是长轮询机制，还有一种被称为流技术，但是这两种方式归根结底还是对轮询的改进，仍旧无法避免需要浏览器周期性地向服务器发送 HTTP 请求。面对这种情况，HTML5 定义了 WebSocket，用于更好地实现真正意义上的实时推送。  &lt;/p&gt;
+&lt;h2 id=&quot;WebSocket-简介&quot;&gt;&lt;a href=&quot;#WebSocket-简介&quot; class=&quot;headerlink&quot; title=&quot;WebSocket 简介&quot;&gt;&lt;/a&gt;WebSocket 简介&lt;/h2&gt;&lt;p&gt;为了实现推送技术，通常采用的方式是轮询（Polling） 和 Comet 技术， Comet 技术又可细分为两种，一种是长轮询机制，还有一种被称为流技术，但是这两种方式归根结底还是对轮询的改进，仍旧无法避免需要浏览器周期性地向服务器发送 HTTP 请求。面对这种情况，HTML5 定义了 WebSocket，用于更好地实现真正意义上的实时推送。  &lt;/p&gt;
 &lt;p&gt;为了建立一个WebSocket连接，客户端浏览器首先要向服务器发起一个HTTP请求，这个请求和通常的HTTP请求不同，包含了一些附加头信息，其中附加头信息”Upgrade: WebSocket”表明这是一个申请协议升级的HTTP请求，服务器端解析这些附加的头信息然后产生应答信息返回给客户端，客户端和服务器端的WebSocket连接就建立起来了，双方就可以通过这个连接通道自由的传递信息，并且这个连接会持续存在直到客户端或者服务器端的某一方主动的关闭连接。  &lt;/p&gt;
 &lt;p&gt;下面是一个 WebSocket 客户端请求头的例子：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://ocpuw0fat.bkt.clouddn.com/2016-9-25-websocket-ws.PNG&quot; alt=&quot;websocket-ws-request&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;nodeJs-与-Socket-io&quot;&gt;&lt;a href=&quot;#nodeJs-与-Socket-io&quot; class=&quot;headerlink&quot; title=&quot;nodeJs 与 Socket.io&quot;&gt;&lt;/a&gt;nodeJs 与 Socket.io&lt;/h3&gt;&lt;p&gt;这里使用 nodeJs 制作一个简单的 WebSocket 服务器，为了方便起见，我们使用 Socket.io 库，它是一个基于 nodeJs 的开源的 WebSocket 库，他不仅通过 nodeJs 实现了服务端的 WebSocket 服务，同时也为我们提供了客户端的 JS 库。  &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ocpuw0fat.bkt.clouddn.com/2016-9-25-websocket-ws.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;nodeJs-与-Socket-io&quot;&gt;&lt;a href=&quot;#nodeJs-与-Socket-io&quot; class=&quot;headerlink&quot; title=&quot;nodeJs 与 Socket.io&quot;&gt;&lt;/a&gt;nodeJs 与 Socket.io&lt;/h2&gt;&lt;p&gt;这里使用 nodeJs 制作一个简单的 WebSocket 服务器，为了方便起见，我们使用 Socket.io 库，它是一个基于 nodeJs 的开源的 WebSocket 库，他不仅通过 nodeJs 实现了服务端的 WebSocket 服务，同时也为我们提供了客户端的 JS 库。  &lt;/p&gt;
 &lt;p&gt;Socket.IO支持4种协议：WebSocket、htmlfile、xhr-polling、jsonp-polling，它会自动根据浏览器选择适合的通讯方式，从而让开发者可以聚焦到功能的实现而不是平台的兼容性，同时Socket.IO具有不错的稳定性和性能。&lt;/p&gt;
-&lt;h3 id=&quot;安装-nodeJS&quot;&gt;&lt;a href=&quot;#安装-nodeJS&quot; class=&quot;headerlink&quot; title=&quot;安装 nodeJS&quot;&gt;&lt;/a&gt;安装 nodeJS&lt;/h3&gt;</content>
+&lt;h2 id=&quot;安装-nodeJs&quot;&gt;&lt;a href=&quot;#安装-nodeJs&quot; class=&quot;headerlink&quot; title=&quot;安装 nodeJs&quot;&gt;&lt;/a&gt;安装 nodeJs&lt;/h2&gt;&lt;p&gt;可以去官网 &lt;a href=&quot;https://nodejs.org/en/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;nodeJs 英文官网&lt;/a&gt; 下载对应的版本，若是需要下载最新版本的　nodeJs，这里推荐去英文官网，中文官网的版本更新速度相对较慢  &lt;/p&gt;
+&lt;h2 id=&quot;搭建-WebSocket-服务器&quot;&gt;&lt;a href=&quot;#搭建-WebSocket-服务器&quot; class=&quot;headerlink&quot; title=&quot;搭建 WebSocket 服务器&quot;&gt;&lt;/a&gt;搭建 WebSocket 服务器&lt;/h2&gt;&lt;p&gt;这边不考虑生产环境（如需要可以把 WebSocket 服务搭建成一个线上可以用域名访问的服务），我们可以直接使用 localhost、本地 IP 或者使用一个虚拟域名指向本地 IP&lt;/p&gt;
+&lt;p&gt;我们先进入工作目录， 比如：D:\WebSocket, 新建一个 &lt;code&gt;package.json&lt;/code&gt; 的文件，内容如下：  &lt;/p&gt;
+&lt;figure class=&quot;highlight json&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attr&quot;&gt;&quot;name&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;websocket-server&quot;&lt;/span&gt;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attr&quot;&gt;&quot;version&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;0.0.1&quot;&lt;/span&gt;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attr&quot;&gt;&quot;description&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;my websocket server&quot;&lt;/span&gt;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attr&quot;&gt;&quot;dependencies&quot;&lt;/span&gt;: &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;&quot;express&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;^4.14.0&quot;&lt;/span&gt;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;&quot;socket.io&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;^1.4.8&quot;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;接下来我们在 CMD 窗口中进入工作文件夹 &lt;code&gt;cd D:\WebSocket&lt;/code&gt; ,然后使用 npm 命令安装 &lt;code&gt;express&lt;/code&gt; 和 &lt;code&gt;socket.io&lt;/code&gt;  &lt;/p&gt;
+&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;npm &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;--save express&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;npm &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;--save socket.io&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;安装成功后，我们在工作目录会看到一个名为 node_modules 的文件夹，里面包含了 &lt;code&gt;express&lt;/code&gt; 和 &lt;code&gt;socket.io&lt;/code&gt; ，接下来我们编写服务端代码，首先新建一个 JS 文件：websocket.js  &lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; app = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;express&#39;&lt;/span&gt;)();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; http = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;http&#39;&lt;/span&gt;).Server(app);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; io = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;socket.io&#39;&lt;/span&gt;)(http);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;app.get(&lt;span class=&quot;string&quot;&gt;&#39;/&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;req, res&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    res.send(&lt;span class=&quot;string&quot;&gt;&#39;&amp;lt;h1&amp;gt;Welcome to WebSocket Server&amp;lt;/h1&amp;gt;&#39;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;http.listen(&lt;span class=&quot;number&quot;&gt;3000&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;listening on *:3000&#39;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;io.on(&lt;span class=&quot;string&quot;&gt;&#39;connection&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;socket&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;进入&#39;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    setInterval(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        io.emit(&lt;span class=&quot;string&quot;&gt;&#39;message&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;webSocket&#39;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;, &lt;span class=&quot;number&quot;&gt;1000&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这边我们监听 3000 端口，当有客户端连接时，便每隔 1S 向客户端发送一个字符串&lt;br&gt;首先我们用命令行运行 node websocket.js，若是顺利我们可以在控制台中看到返回的 &lt;code&gt;listening on *:3000&lt;/code&gt; 信息，说明服务已经搭建成功。此时浏览器里输入 &lt;code&gt;http://localhost:3000&lt;/code&gt;，可以看到正常的欢迎页面:&lt;br&gt;&lt;img src=&quot;http://ocpuw0fat.bkt.clouddn.com/2016-9-25-websocket-run.PNG&quot; alt=&quot;&quot;&gt;&lt;br&gt;至此，服务端编写完成&lt;/p&gt;
+&lt;h2 id=&quot;客户端代码实现&quot;&gt;&lt;a href=&quot;#客户端代码实现&quot; class=&quot;headerlink&quot; title=&quot;客户端代码实现&quot;&gt;&lt;/a&gt;客户端代码实现&lt;/h2&gt;&lt;p&gt;PS :　我们可以使用 socket.io 提供的客户端 JS 库，地址为 ： &lt;a href=&quot;http://localhost:3000/socket.io/socket.io.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:3000/socket.io/socket.io.js&lt;/a&gt;&lt;br&gt;完整代码如下：  &lt;/p&gt;
+&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;lang&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;en&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;head&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;charset&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;title&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;title&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;src&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://localhost:3000/socket.io/socket.io.js&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;undefined&quot;&gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;head&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;javascript&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; socket = io.connect(&lt;span class=&quot;string&quot;&gt;&#39;ws://localhost:3000/&#39;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    socket.send(&lt;span class=&quot;string&quot;&gt;&#39;hello Websocket&#39;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    socket.on(&lt;span class=&quot;string&quot;&gt;&#39;message&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;obj&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.writeln(obj);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;html&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;随后我们访问此页面，为了验证是否进行了跨域，我们使这个页面运行在与 websocket 服务端不同的端口号下，此时即为跨域，见下图&lt;br&gt;&lt;img src=&quot;http://ocpuw0fat.bkt.clouddn.com/2016-9-25-websocket-poll_two.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;此时可以看到，页面挂载在端口 63342 下，与 WebSocket 服务所在的 3000 端口并不同，但是此时 websocket 连接成功创建并且返回了数据，此处可见，使用 websocket 来进行跨域是可行的。  &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ocpuw0fat.bkt.clouddn.com/2016-9-25-websocket-poll_one.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;其次我们可以看到的是，WebSocket 与客户端建立连接后，并未向 ajax 请求那样返回数据后就立即结束，而是一直处于 padding 状态，这极大地减小了发送 HTTP request 的数量，实现了真正意义上的实时推送  &lt;/p&gt;
+&lt;p&gt;PS ： 下面表格列出了跨域的详细情况:  &lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;URL&lt;/th&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;说明&lt;/th&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;是否允许通讯&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.a.com/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.a.com/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;同一域名下&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;允许&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.a.com/lab/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/lab/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.a.com/script/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/script/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;同一域名下不同文件夹&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;允许&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.a.com:8000/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com:8000/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.a.com/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;同一域名，不同端口&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;不允许&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.a.com/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.a.com/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.a.com/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;一域名，不同协议&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;不允许&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.a.com/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://192.168.199.1/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://192.168.199.1/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;域名和域名对应ip&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;不允许&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.a.com/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://script.a.com/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://script.a.com/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;主域相同，子域不同&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;不允许&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.a.com/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://a.com/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://a.com/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;同一域名，不同二级域名（同上）&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;不允许（cookie这种情况下也不允许访问）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;&lt;a href=&quot;http://www.cnblogs.com/a.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/a.js&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.a.com/b.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.a.com/b.js&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;不同域名&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;不允许&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</content>
     
     <summary type="html">
     
-      &lt;p&gt;websocket 被称为 Web 领域的实时推送技术，也被称作为 Realtime 技术，有别于 ajax 轮询，它能实现真正意义上的实时消息推送，它有着广泛的应用场景，比如在线聊天室，web 客服或是 WebIM 等等。除此之外，我们还可用它来实现前端的跨域数据访问&lt;/
+      &lt;p&gt;websocket 被称为 Web 领域的实时推送技术，也被称作为 Realtime 技术，有别于 ajax 轮询，它能实现真正意义上的实时消息推送，它有着广泛的应用场景，比如在线聊天室，web 客服或是 WebIM 等等。除此之外，我们还可用它来实现前端的跨域数据访问&lt;br&gt;
     
     </summary>
+    
+      <category term="javascript" scheme="http://yoursite.com/categories/javascript/"/>
     
     
       <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
