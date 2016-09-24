@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-24T15:09:03.315Z</updated>
+  <updated>2016-09-24T15:13:04.686Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/08/01/Javascript-%E8%B7%A8%E5%9F%9F%E4%B9%8B-WebSocket/"/>
     <id>http://yoursite.com/2016/08/01/Javascript-跨域之-WebSocket/</id>
     <published>2016-08-01T13:40:03.000Z</published>
-    <updated>2016-09-24T15:09:03.315Z</updated>
+    <updated>2016-09-24T15:13:04.686Z</updated>
     
     <content type="html">&lt;p&gt;websocket 被称为 Web 领域的实时推送技术，也被称作为 Realtime 技术，有别于 ajax 轮询，它能实现真正意义上的实时消息推送，它有着广泛的应用场景，比如在线聊天室，web 客服或是 WebIM 等等。除此之外，我们还可用它来实现前端的跨域数据访问&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;以下使用-nodejs-实现一个简易的-WebSocket-服务器&quot;&gt;&lt;a href=&quot;#以下使用-nodejs-实现一个简易的-WebSocket-服务器&quot; class=&quot;headerlink&quot; title=&quot;以下使用 nodejs 实现一个简易的 WebSocket 服务器&quot;&gt;&lt;/a&gt;以下使用 nodejs 实现一个简易的 WebSocket 服务器&lt;/h2&gt;&lt;blockquote&gt;
@@ -46,7 +46,7 @@
 &lt;p&gt;随后我们访问此页面，为了验证是否进行了跨域，我们使这个页面运行在与 websocket 服务端不同的端口号下，此时即为跨域，见下图&lt;br&gt;&lt;img src=&quot;http://ocpuw0fat.bkt.clouddn.com/2016-9-25-websocket-poll_two.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;此时可以看到，页面挂载在端口 63342 下，与 WebSocket 服务所在的 3000 端口并不同，但是此时 websocket 连接成功创建并且返回了数据，此处可见，使用 websocket 来进行跨域是可行的。  &lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://ocpuw0fat.bkt.clouddn.com/2016-9-25-websocket-poll_one.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;其次我们可以看到的是，WebSocket 与客户端建立连接后，并未向 ajax 请求那样返回数据后就立即结束，而是一直处于 padding 状态，这极大地减小了发送 HTTP request 的数量，实现了真正意义上的实时推送  &lt;/p&gt;
+&lt;p&gt;其次我们可以看到的是，WebSocket 与客户端建立连接后，并未向 ajax 请求那样返回数据后就立即结束，而是一直处于 pending 状态，这极大地减小了发送 HTTP request 的数量，实现了真正意义上的实时推送  &lt;/p&gt;
 &lt;p&gt;PS ： 下面表格列出了跨域的详细情况:  &lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
