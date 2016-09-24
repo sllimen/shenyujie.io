@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-24T13:51:05.660Z</updated>
+  <updated>2016-09-24T14:14:27.594Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,13 +20,19 @@
     <link href="http://yoursite.com/2016/09/24/Javascript-%E8%B7%A8%E5%9F%9F%E4%B9%8B-WebSocket/"/>
     <id>http://yoursite.com/2016/09/24/Javascript-跨域之-WebSocket/</id>
     <published>2016-09-24T13:40:03.000Z</published>
-    <updated>2016-09-24T13:51:05.660Z</updated>
+    <updated>2016-09-24T14:14:27.594Z</updated>
     
     <content type="html">&lt;p&gt;websocket 被称为 Web 领域的实时推送技术，也被称作为 Realtime 技术，有别于 ajax 轮询，它能实现真正意义上的实时消息推送，它有着广泛的应用场景，比如在线聊天室，web 客服或是 WebIM 等等。除此之外，我们还可用它来实现前端的跨域数据访问&lt;/p&gt;
 &lt;h2 id=&quot;以下使用-nodejs-实现一个简易的-WebSocket-服务器&quot;&gt;&lt;a href=&quot;#以下使用-nodejs-实现一个简易的-WebSocket-服务器&quot; class=&quot;headerlink&quot; title=&quot;以下使用 nodejs 实现一个简易的 WebSocket 服务器&quot;&gt;&lt;/a&gt;以下使用 nodejs 实现一个简易的 WebSocket 服务器&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;nodeJs version : v 6.5.0&lt;br&gt;system environment : windows 10 1607  &lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&quot;WebSocket-简介&quot;&gt;&lt;a href=&quot;#WebSocket-简介&quot; class=&quot;headerlink&quot; title=&quot;WebSocket 简介&quot;&gt;&lt;/a&gt;WebSocket 简介&lt;/h3&gt;</content>
+&lt;h3 id=&quot;WebSocket-简介&quot;&gt;&lt;a href=&quot;#WebSocket-简介&quot; class=&quot;headerlink&quot; title=&quot;WebSocket 简介&quot;&gt;&lt;/a&gt;WebSocket 简介&lt;/h3&gt;&lt;p&gt;为了实现推送技术，通常采用的方式是轮询（Polling） 和 Comet 技术， Comet 技术又可细分为两种，一种是长轮询机制，还有一种被称为流技术，但是这两种方式归根结底还是对轮询的改进，仍旧无法避免需要浏览器周期性地向服务器发送 HTTP 请求。面对这种情况，HTML5 定义了 WebSocket，用于更好地实现真正意义上的实时推送。  &lt;/p&gt;
+&lt;p&gt;为了建立一个WebSocket连接，客户端浏览器首先要向服务器发起一个HTTP请求，这个请求和通常的HTTP请求不同，包含了一些附加头信息，其中附加头信息”Upgrade: WebSocket”表明这是一个申请协议升级的HTTP请求，服务器端解析这些附加的头信息然后产生应答信息返回给客户端，客户端和服务器端的WebSocket连接就建立起来了，双方就可以通过这个连接通道自由的传递信息，并且这个连接会持续存在直到客户端或者服务器端的某一方主动的关闭连接。  &lt;/p&gt;
+&lt;p&gt;下面是一个 WebSocket 客户端请求头的例子：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ocpuw0fat.bkt.clouddn.com/2016-9-25-websocket-ws.PNG&quot; alt=&quot;websocket-ws-request&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;nodeJs-与-Socket-io&quot;&gt;&lt;a href=&quot;#nodeJs-与-Socket-io&quot; class=&quot;headerlink&quot; title=&quot;nodeJs 与 Socket.io&quot;&gt;&lt;/a&gt;nodeJs 与 Socket.io&lt;/h3&gt;&lt;p&gt;这里使用 nodeJs 制作一个简单的 WebSocket 服务器，为了方便起见，我们使用 Socket.io 库，它是一个基于 nodeJs 的开源的 WebSocket 库，他不仅通过 nodeJs 实现了服务端的 WebSocket 服务，同时也为我们提供了客户端的 JS 库。  &lt;/p&gt;
+&lt;p&gt;Socket.IO支持4种协议：WebSocket、htmlfile、xhr-polling、jsonp-polling，它会自动根据浏览器选择适合的通讯方式，从而让开发者可以聚焦到功能的实现而不是平台的兼容性，同时Socket.IO具有不错的稳定性和性能。&lt;/p&gt;
+&lt;h3 id=&quot;安装-nodeJS&quot;&gt;&lt;a href=&quot;#安装-nodeJS&quot; class=&quot;headerlink&quot; title=&quot;安装 nodeJS&quot;&gt;&lt;/a&gt;安装 nodeJS&lt;/h3&gt;</content>
     
     <summary type="html">
     
