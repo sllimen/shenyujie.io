@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-02T10:24:16.542Z</updated>
+  <updated>2016-09-24T13:51:05.660Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Javascript 跨域之 WebSocket</title>
+    <link href="http://yoursite.com/2016/09/24/Javascript-%E8%B7%A8%E5%9F%9F%E4%B9%8B-WebSocket/"/>
+    <id>http://yoursite.com/2016/09/24/Javascript-跨域之-WebSocket/</id>
+    <published>2016-09-24T13:40:03.000Z</published>
+    <updated>2016-09-24T13:51:05.660Z</updated>
+    
+    <content type="html">&lt;p&gt;websocket 被称为 Web 领域的实时推送技术，也被称作为 Realtime 技术，有别于 ajax 轮询，它能实现真正意义上的实时消息推送，它有着广泛的应用场景，比如在线聊天室，web 客服或是 WebIM 等等。除此之外，我们还可用它来实现前端的跨域数据访问&lt;/p&gt;
+&lt;h2 id=&quot;以下使用-nodejs-实现一个简易的-WebSocket-服务器&quot;&gt;&lt;a href=&quot;#以下使用-nodejs-实现一个简易的-WebSocket-服务器&quot; class=&quot;headerlink&quot; title=&quot;以下使用 nodejs 实现一个简易的 WebSocket 服务器&quot;&gt;&lt;/a&gt;以下使用 nodejs 实现一个简易的 WebSocket 服务器&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;nodeJs version : v 6.5.0&lt;br&gt;system environment : windows 10 1607  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;WebSocket-简介&quot;&gt;&lt;a href=&quot;#WebSocket-简介&quot; class=&quot;headerlink&quot; title=&quot;WebSocket 简介&quot;&gt;&lt;/a&gt;WebSocket 简介&lt;/h3&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;websocket 被称为 Web 领域的实时推送技术，也被称作为 Realtime 技术，有别于 ajax 轮询，它能实现真正意义上的实时消息推送，它有着广泛的应用场景，比如在线聊天室，web 客服或是 WebIM 等等。除此之外，我们还可用它来实现前端的跨域数据访问&lt;/
+    
+    </summary>
+    
+    
+      <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>JavaScript 跨域(二) 之 JSONP</title>
