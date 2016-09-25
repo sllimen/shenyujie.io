@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-25T13:03:55.498Z</updated>
+  <updated>2016-09-25T13:07:41.069Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>Javascipt 跨域(四)之 window.name + iframe</title>
-    <link href="http://yoursite.com/2016/09/25/Javascipt-%E8%B7%A8%E5%9F%9F-%E5%9B%9B-%E4%B9%8B-window-name-iframe/"/>
-    <id>http://yoursite.com/2016/09/25/Javascipt-跨域-四-之-window-name-iframe/</id>
-    <published>2016-09-25T12:53:37.000Z</published>
-    <updated>2016-09-25T13:03:55.498Z</updated>
+    <link href="http://yoursite.com/2016/08/10/Javascipt-%E8%B7%A8%E5%9F%9F-%E5%9B%9B-%E4%B9%8B-window-name-iframe/"/>
+    <id>http://yoursite.com/2016/08/10/Javascipt-跨域-四-之-window-name-iframe/</id>
+    <published>2016-08-10T12:53:37.000Z</published>
+    <updated>2016-09-25T13:07:41.069Z</updated>
     
     <content type="html">&lt;p&gt;我们知道，iframe 是 html 的一个标签，可以在页面中创建内联框架，它有个src 属性（可以指向文件地址，html，php等）可以选择内联框架的内容。window.name 是当前窗口的名字，每个 iframe 都有包裹它的window，而这个 window 是 top window 的子窗口，既然同为 window 对象，则其自然也有 window.name 的值&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  &lt;/p&gt;
 &lt;p&gt;window.name 的神奇之处在于 name 的值在不同的页面甚至是不同的域名加载后依然存在，而且可以最大支持  2mb 的值  &lt;/p&gt;
