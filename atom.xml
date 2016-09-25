@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-25T13:07:41.069Z</updated>
+  <updated>2016-09-25T13:11:19.339Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Javascipt 跨域(四)之 window.name + iframe</title>
+    <title>Javascript 跨域(四)之 window.name + iframe</title>
     <link href="http://yoursite.com/2016/08/10/Javascipt-%E8%B7%A8%E5%9F%9F-%E5%9B%9B-%E4%B9%8B-window-name-iframe/"/>
     <id>http://yoursite.com/2016/08/10/Javascipt-跨域-四-之-window-name-iframe/</id>
     <published>2016-08-10T12:53:37.000Z</published>
-    <updated>2016-09-25T13:07:41.069Z</updated>
+    <updated>2016-09-25T13:11:19.339Z</updated>
     
     <content type="html">&lt;p&gt;我们知道，iframe 是 html 的一个标签，可以在页面中创建内联框架，它有个src 属性（可以指向文件地址，html，php等）可以选择内联框架的内容。window.name 是当前窗口的名字，每个 iframe 都有包裹它的window，而这个 window 是 top window 的子窗口，既然同为 window 对象，则其自然也有 window.name 的值&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  &lt;/p&gt;
 &lt;p&gt;window.name 的神奇之处在于 name 的值在不同的页面甚至是不同的域名加载后依然存在，而且可以最大支持  2mb 的值  &lt;/p&gt;
@@ -52,7 +52,7 @@
     
     </summary>
     
-      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="javascript" scheme="http://yoursite.com/categories/javascript/"/>
     
     
       <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
@@ -163,7 +163,7 @@
     <link href="http://yoursite.com/2016/07/29/JavaScript-%E8%B7%A8%E5%9F%9F%E4%B9%8BJSONP/"/>
     <id>http://yoursite.com/2016/07/29/JavaScript-跨域之JSONP/</id>
     <published>2016-07-29T03:39:40.000Z</published>
-    <updated>2016-08-02T10:24:16.542Z</updated>
+    <updated>2016-09-25T13:12:45.927Z</updated>
     
     <content type="html">&lt;p&gt;浏览器的同源策略在保障了我们的数据安全，但是在进行一些比较深入的前端编程的时候却略显苛刻。JSONP 的跨域 GET 请求是一个常用的解决方案，下面我们来看一下 JSONP 是如何实现的，并探讨下 JSONP 的跨域原理&lt;/p&gt;
 &lt;h2 id=&quot;JSONP-的定义&quot;&gt;&lt;a href=&quot;#JSONP-的定义&quot; class=&quot;headerlink&quot; title=&quot;JSONP 的定义&quot;&gt;&lt;/a&gt;JSONP 的定义&lt;/h2&gt;&lt;p&gt;Jsonp(JSON with Padding) 是 json 的一种”使用模式”，可以让网页从别的域名（网站）那获取资料，即跨域读取数据&lt;/p&gt;
@@ -193,7 +193,7 @@
     
     </summary>
     
-      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="javascript" scheme="http://yoursite.com/categories/javascript/"/>
     
     
       <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
