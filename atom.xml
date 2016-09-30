@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-30T08:57:27.198Z</updated>
+  <updated>2016-09-30T09:06:26.346Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Javascript 跨(五)之 window.location.hash + iframe</title>
+    <title>Javascript 跨域(五)之 window.location.hash + iframe</title>
     <link href="http://yoursite.com/2016/08/15/Javascript-%E8%B7%A8-%E4%BA%94-%E4%B9%8B-window-location-hash-iframe/"/>
     <id>http://yoursite.com/2016/08/15/Javascript-跨-五-之-window-location-hash-iframe/</id>
     <published>2016-08-15T02:33:19.000Z</published>
-    <updated>2016-09-30T08:57:27.198Z</updated>
+    <updated>2016-09-30T09:06:26.346Z</updated>
     
     <content type="html">&lt;p&gt;上一次我们介绍了如何使用 window.name + iframe 来跨域，其中我们碰到了同源政策所带来的阻碍，但借助于重定向 src ，我们最终还是成功获取到了跨域的数据，此文的原理和上一篇大致相同，同样需要插入子窗口，同样需要我们对同源政策进行处理。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;何为-local-hash-锚部分&quot;&gt;&lt;a href=&quot;#何为-local-hash-锚部分&quot; class=&quot;headerlink&quot; title=&quot;何为 local.hash (锚部分)&quot;&gt;&lt;/a&gt;何为 local.hash (锚部分)&lt;/h2&gt;&lt;p&gt;工欲善其事，必先利其器，要了解 location.hash + iframe 的跨域原理，我们首先要知道何为 window.hash，其实他就是浏览器 url &lt;code&gt;#&lt;/code&gt; 符号后面的部分，我们称之为锚部分，详情可见 w3c 对此的 &lt;a href=&quot;http://www.runoob.com/jsref/prop-loc-hash.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;定义&lt;/a&gt;。那么何为锚点呢？ 我们可以看一下例子  &lt;/p&gt;
