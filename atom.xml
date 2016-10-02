@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-10-02T05:23:54.374Z</updated>
+  <updated>2016-10-02T05:36:24.882Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>Javascript 跨域(六)之 document.domain + iframe</title>
-    <link href="http://yoursite.com/2016/10/02/Javascript%E8%B7%A8%E5%9F%9F-%E5%85%AD-%E4%B9%8B-document-domain-iframe/"/>
-    <id>http://yoursite.com/2016/10/02/Javascript跨域-六-之-document-domain-iframe/</id>
-    <published>2016-10-02T04:44:36.000Z</published>
-    <updated>2016-10-02T05:23:54.374Z</updated>
+    <link href="http://yoursite.com/2016/08/21/Javascript%E8%B7%A8%E5%9F%9F-%E5%85%AD-%E4%B9%8B-document-domain-iframe/"/>
+    <id>http://yoursite.com/2016/08/21/Javascript跨域-六-之-document-domain-iframe/</id>
+    <published>2016-08-21T04:44:36.000Z</published>
+    <updated>2016-10-02T05:36:24.882Z</updated>
     
     <content type="html">&lt;p&gt;对于主域相同而子域不同的情况，可以通过设置 document.domain 的办法来解决。&lt;br&gt;具体的做法我们可以在 &lt;a href=&quot;http://www.shenyujie.com/a.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.shenyujie.com/a.html&lt;/a&gt; 和 &lt;a href=&quot;http://m.shenyujie.com/b.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://m.shenyujie.com/b.html&lt;/a&gt; 下面共同设置 document.domain = ‘shenyujie.com’，然后在 a.html 下面创建一个隐藏的 iframe，去控制 iframe 的contentDocument，这样我们就可以实现交互了  &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;( 这两个域名必须属于同一个基础域名!而且所用的协议，端口都要一致，否则无法利用document.domain进行跨域 )  &lt;/p&gt;
 &lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;p&gt;为了方便起见，我们这里使用 wamp 来构建我们的 apache 服务器，以供试验之用。&lt;br&gt;为了完成我们的跨域实验，我们首先需要搭建环境：  &lt;/p&gt;
