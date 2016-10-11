@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-10-04T06:26:07.300Z</updated>
+  <updated>2016-10-04T07:02:59.719Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Javascript 跨域(八) 之 CORS</title>
+    <link href="http://yoursite.com/2016/08/28/Javascript-%E8%B7%A8%E5%9F%9F-%E5%85%AB-%E4%B9%8B-CORS/"/>
+    <id>http://yoursite.com/2016/08/28/Javascript-跨域-八-之-CORS/</id>
+    <published>2016-08-28T06:51:46.000Z</published>
+    <updated>2016-10-04T07:02:59.719Z</updated>
+    
+    <content type="html">&lt;p&gt;前言：终于写到跨域的倒数第二篇了（最后一篇flash因为兼容性太奇葩还要额外装插件，我们先无视），算下来这可以算是最后一篇跨域的文章也不为过。  &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;既然写文章，肯定是要百度一番的，何况我对 CORS 跨域用的不算多，不是很熟练。上百度一搜，这么重要的前端跨域技术竟然很少有提及，卫星定位系统反而占据了搜索页的第一条，我不得不感叹，果然度娘只适合看各种内涵段子，技术问题还是要问 google  &lt;/p&gt;
+&lt;h2 id=&quot;优势&quot;&gt;&lt;a href=&quot;#优势&quot; class=&quot;headerlink&quot; title=&quot;优势&quot;&gt;&lt;/a&gt;优势&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;CORS 支持所有类型的 HTTP 请求&lt;/li&gt;
+&lt;li&gt;开发者可以使用普通的 XMLHttpRequest 来发起或是取得数据&lt;/li&gt;
+&lt;li&gt;现在大部分主流的浏览器均以支持 CORS&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;兼容性&quot;&gt;&lt;a href=&quot;#兼容性&quot; class=&quot;headerlink&quot; title=&quot;兼容性&quot;&gt;&lt;/a&gt;兼容性&lt;/h2&gt;&lt;iframe src=&quot;http://caniuse.com/#feat=cors&quot; style=&quot;width:100%;height:400px&quot;&gt;&lt;/iframe&gt;  
+
+&lt;h2 id=&quot;服务器端的实现&quot;&gt;&lt;a href=&quot;#服务器端的实现&quot; class=&quot;headerlink&quot; title=&quot;服务器端的实现&quot;&gt;&lt;/a&gt;服务器端的实现&lt;/h2&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前言：终于写到跨域的倒数第二篇了（最后一篇flash因为兼容性太奇葩还要额外装插件，我们先无视），算下来这可以算是最后一篇跨域的文章也不为过。
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://yoursite.com/categories/javascript/"/>
+    
+    
+      <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>Javascript 跨域(七) 之 postMessage</title>
@@ -769,6 +799,211 @@
     
     
       <category term="心情" scheme="http://yoursite.com/tags/%E5%BF%83%E6%83%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>fis3脚本以及基于nodejs的ftp上传工具</title>
+    <link href="http://yoursite.com/2016/02/16/fis3%E8%84%9A%E6%9C%AC%E4%BB%A5%E5%8F%8A%E5%9F%BA%E4%BA%8Enodejs%E7%9A%84ftp%E4%B8%8A%E4%BC%A0%E5%B7%A5%E5%85%B7/"/>
+    <id>http://yoursite.com/2016/02/16/fis3脚本以及基于nodejs的ftp上传工具/</id>
+    <published>2016-02-16T11:47:48.000Z</published>
+    <updated>2016-10-11T14:49:50.916Z</updated>
+    
+    <content type="html">&lt;p&gt;前言：fis3 可以进行文件压缩，灰度发布，自动生成精灵图，最重要的他可以用文件指纹的方式解决浏览器缓存机制所带来的静态资源发布时，用户可能读取的仍是缓存的旧文件而无法实时更新的问题。&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://fis.baidu.com/fis3/api/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;具体使用&lt;/a&gt;&lt;br&gt;例子：（fis3 部分）  &lt;/p&gt;
+&lt;figure class=&quot;highlight lasso&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;27&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;fis.&lt;span class=&quot;keyword&quot;&gt;match&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;::packager&#39;&lt;/span&gt;, &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  spriter: fis.plugin(&lt;span class=&quot;string&quot;&gt;&#39;csssprites&#39;&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;fis.&lt;span class=&quot;keyword&quot;&gt;match&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;*&#39;&lt;/span&gt;, &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  useHash: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;fis.&lt;span class=&quot;keyword&quot;&gt;match&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;*.js&#39;&lt;/span&gt;, &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  optimizer: fis.plugin(&lt;span class=&quot;string&quot;&gt;&#39;uglify-js&#39;&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;fis.&lt;span class=&quot;keyword&quot;&gt;match&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;*.css&#39;&lt;/span&gt;, &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  useSprite: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  optimizer: fis.plugin(&lt;span class=&quot;string&quot;&gt;&#39;clean-css&#39;&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;fis.&lt;span class=&quot;keyword&quot;&gt;match&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;*.png&#39;&lt;/span&gt;, &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  optimizer: fis.plugin(&lt;span class=&quot;string&quot;&gt;&#39;png-compressor&#39;&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;fis.&lt;span class=&quot;keyword&quot;&gt;match&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;*.&amp;#123;png,js,css&amp;#125;&#39;&lt;/span&gt;, &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  release: &lt;span class=&quot;string&quot;&gt;&#39;/static/$0&#39;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;``&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;`  &lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;奈何笔者的项目使用的是 freemaker 的 FTL 作为的模板引擎，fis3 恰好不兼容 FTL 文件的格式，使得 FTL 文件内的静态资源无法使用加入文件指纹后的新文件名造成失效，故而使用 nodejs 写一个脚本，一来生成映射表，映射静态资源加入指纹前后文件名的对应关系，而来批量替换 FTL 文件中相应的静态资源项&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;// 由于 fis3 的文件指纹功能不支持 FTL 格式, 故而手动对 FTL 中的文件进行替换&lt;/p&gt;
+&lt;p&gt;var fs = require(‘fs’);&lt;br&gt;var path = require(“path”);&lt;/p&gt;
+&lt;p&gt;// 储存文件的对应关系&lt;br&gt;var map = {};&lt;/p&gt;
+&lt;p&gt;// 获取当前进程的工作目录&lt;br&gt;var cwd = process.cwd();&lt;/p&gt;
+&lt;p&gt;// 静态资源的释放目录,释放到 rs 目录&lt;br&gt;var staticPath = cwd + ‘/static’;&lt;/p&gt;
+&lt;p&gt;// FTL 模板的存放位置&lt;br&gt;var viewPath = cwd + ‘/WEB-INF/template’;&lt;/p&gt;
+&lt;p&gt;// CSS 文件存放的位置&lt;br&gt;var cssPath = staticPath + ‘/style’;&lt;/p&gt;
+&lt;p&gt;// 对文件以及文件目录进行扫描&lt;br&gt;function walk(path, fileCallback, dirCallback) {&lt;br&gt;    var dirList = fs.readdirSync(path);&lt;br&gt;    dirList.forEach(function (item) {&lt;br&gt;        var item_path = path + ‘/‘ + item;&lt;br&gt;        if (fs.statSync(item_path).isDirectory()) {&lt;br&gt;            dirCallback &amp;amp;&amp;amp; dirCallback(item_path);&lt;br&gt;            walk(item_path, fileCallback, dirCallback);&lt;br&gt;        } else {&lt;br&gt;            fileCallback &amp;amp;&amp;amp; fileCallback(item_path);&lt;br&gt;        }&lt;br&gt;    });&lt;br&gt;}&lt;/p&gt;
+&lt;p&gt;console.log(“步骤 1: 生成 fis3 转换后前后文件名的对应关系 !”);&lt;/p&gt;
+&lt;p&gt;walk(staticPath, function (item_path) {&lt;br&gt;    if (item&lt;em&gt;path.match(/&lt;/em&gt;\w{8}./)) {&lt;br&gt;        // 获取当前文件的相对路径&lt;br&gt;        var relativePath = item&lt;em&gt;path.replace(staticPath, ‘’);&lt;br&gt;        var originalPath = relativePath.replace(/&lt;/em&gt;\w{8}(?=.)/, ‘’);&lt;br&gt;        map[originalPath] = relativePath;&lt;br&gt;    }&lt;br&gt;});&lt;/p&gt;
+&lt;p&gt;console.log(“步骤 2: 处理 FTL 文件”);&lt;/p&gt;
+&lt;p&gt;walk(viewPath, function (item_path) {&lt;br&gt;    try {&lt;br&gt;        var context = fs.readFileSync(item_path, ‘utf-8’);&lt;br&gt;    } catch (e) {&lt;br&gt;        console.error(‘open ‘ + item_path + ‘ error !’);&lt;br&gt;    }&lt;br&gt;    var reg = /\${rsRoots.rsRoot}.&lt;em&gt;?.(js|css|jpg|png|ico|gif).&lt;/em&gt;?”/g;&lt;br&gt;    context = context.replace(reg, function (data) {&lt;br&gt;        var pathReg = /\/.*?.(jpg|png|gif|ico|js|css)\b/g;&lt;br&gt;        data = data.replace(pathReg, function (match) {&lt;br&gt;            return map[match] ? map[match] : match;&lt;br&gt;        });&lt;br&gt;        return data;&lt;br&gt;    });&lt;br&gt;    try {&lt;br&gt;        fs.writeFileSync(item_path, context);&lt;br&gt;    } catch (e) {&lt;br&gt;        console.error(‘write to ‘ + item_path + ‘ error !’);&lt;br&gt;    }&lt;br&gt;});&lt;/p&gt;
+&lt;p&gt;console.log(“步骤 3: 处理 CSS 文件”);&lt;br&gt;walk(cssPath, function (item_path) {&lt;br&gt;    try {&lt;br&gt;        var context = fs.readFileSync(item_path, ‘utf-8’);&lt;br&gt;    } catch (e) {&lt;br&gt;        console.error(‘open ‘ + item&lt;em&gt;path + ‘ error !’);&lt;br&gt;    }&lt;br&gt;    var urlReg = /url((http||..)?.*?)/g,&lt;br&gt;        md5Reg = /&lt;/em&gt;\w{8}(?=.)/;&lt;br&gt;    context = context.replace(urlReg, function (match, isHttpUrl) {&lt;br&gt;        if (!isHttpUrl) {&lt;br&gt;            var pathReg = /\/.*.(png|jpg|ico|gif)/;&lt;br&gt;            match = match.replace(pathReg, function (data) {&lt;br&gt;                return ‘/rs’ + data;&lt;br&gt;            });&lt;br&gt;        }&lt;br&gt;        return match;&lt;br&gt;    });&lt;br&gt;    try {&lt;br&gt;        fs.writeFileSync(item_path, context);&lt;br&gt;    } catch (e) {&lt;br&gt;        console.error(‘write to ‘ + item_path + ‘ error !’)&lt;br&gt;    }&lt;br&gt;});&lt;/p&gt;
+&lt;p&gt;console.log(“释放完毕”);&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;编写 nodejs 版本的 FTP 上传工具，以增量的方式上传加入文件指纹后的静态资源至 FTP&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;// 统计失败重试的次数&lt;br&gt;var retryCount = -1;&lt;/p&gt;
+&lt;p&gt;// 生成分割线&lt;br&gt;var couLine = repeat(‘-‘, 25);&lt;/p&gt;
+&lt;p&gt;process.on(‘uncaughtException’, function (err) {&lt;br&gt;    // 最多尝试 5 次&lt;br&gt;    if (retryCount &amp;lt;= 5) doFtpWork();&lt;br&gt;    else process.exit();&lt;br&gt;});&lt;/p&gt;
+&lt;p&gt;// 自动提交经过 fis3 转换过的静态资源到服务器&lt;/p&gt;
+&lt;p&gt;var path = require(‘path’);&lt;br&gt;var fs = require(‘fs’);&lt;br&gt;var client = require(‘ftp’);&lt;/p&gt;
+&lt;p&gt;// 用于储存需要创建的文件夹&lt;br&gt;var folderStore = [];&lt;/p&gt;
+&lt;p&gt;// 用于储存需要上传的文件&lt;br&gt;var fileStore = [];&lt;/p&gt;
+&lt;p&gt;// 用于标记本地文件的上传类型&lt;br&gt;var upMap = [];&lt;/p&gt;
+&lt;p&gt;// 获取当前进程的工作目录&lt;br&gt;var cwd = process.cwd();&lt;/p&gt;
+&lt;p&gt;// 静态资源的释放目录,释放到 rs 目录&lt;br&gt;var staticPath = cwd + ‘/static’;&lt;/p&gt;
+&lt;p&gt;// 需要上传到的 ftp 服务器的目录&lt;br&gt;var file_directory = ‘p2b/nodejsFTP/static’;&lt;/p&gt;
+&lt;p&gt;// 用户名和密码信息&lt;br&gt;var ftpConfig = {&lt;br&gt;    host: “192.168.60.228”,&lt;br&gt;    user: “dev”,&lt;br&gt;    password: “cc.123”&lt;br&gt;};&lt;/p&gt;
+&lt;p&gt;/**&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;功能:用于生成重复字符串&lt;/li&gt;
+&lt;li&gt;@param target&lt;/li&gt;
+&lt;li&gt;@param n&lt;/li&gt;
+&lt;li&gt;@returns {string}&lt;br&gt;*/&lt;br&gt;function repeat(target, n) {&lt;br&gt; return (new Array(n + 1)).join(target);&lt;br&gt;}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;/**&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;功能 : 遍历本地的文件及其目录&lt;/li&gt;
+&lt;li&gt;@param path&lt;/li&gt;
+&lt;li&gt;@param fileCallback&lt;/li&gt;
+&lt;li&gt;@param dirCallback&lt;br&gt;*/&lt;br&gt;function walk(path, fileCallback, dirCallback) {&lt;br&gt; var dirList = fs.readdirSync(path);&lt;br&gt; dirList.forEach(function (item) {&lt;pre&gt;&lt;code&gt;var item_path = path + &amp;apos;/&amp;apos; + item;
+if (fs.statSync(item_path).isDirectory()) {
+    dirCallback &amp;amp;&amp;amp; dirCallback(item_path);
+    walk(item_path, fileCallback, dirCallback);
+} else {
+    fileCallback &amp;amp;&amp;amp; fileCallback(item_path);
+}
+&lt;/code&gt;&lt;/pre&gt; });&lt;br&gt;}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;/**&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;功能 : 遍历固定目录下所有的文件&lt;/li&gt;
+&lt;li&gt;@param directory&lt;/li&gt;
+&lt;li&gt;@param fileCallback&lt;br&gt;*/&lt;br&gt;function walk_ftp(directory, fileCallback) {&lt;br&gt; // 新建本地的 FTP 服务&lt;br&gt; var ftp = new client();&lt;br&gt; // 连接 ftp 服务器&lt;br&gt; ftp.connect(ftpConfig);&lt;br&gt; // 获取 ftp 指定目录下所有的文件&lt;br&gt; ftp.on(‘ready’, function () {&lt;pre&gt;&lt;code&gt;ftp.cwd(directory, function (err) {
+    if (err) throw err;
+    ftp.list(function (err, list) {
+        if (err) throw err;
+        list.forEach(function (item) {
+            var next = path.join(directory, item.name);
+            // 如果是目录
+            if (item.type &amp;amp;&amp;amp; item.type.trim() == &amp;apos;d&amp;apos;) {
+                walk_ftp(next, fileCallback);
+            } else {
+                fileCallback &amp;amp;&amp;amp; fileCallback(next);
+            }
+        });
+        ftp.end();
+    });
+});
+&lt;/code&gt;&lt;/pre&gt; });&lt;br&gt;}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;/**&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;ul&gt;
+&lt;li&gt;&lt;ul&gt;
+&lt;li&gt;判断文件写入服务器的方式:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;直接写入&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;删除 ftp 上的旧文件后写入&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;无需写入,跳过&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;可以写入的条件是:&lt;/li&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;此文件没有出现在指定目录中,直接写入&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;FTP 上存在旧的文件,删除后写入&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;文件未发生改变,无需写入&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;@param folder&lt;/li&gt;
+&lt;li&gt;@param file&lt;/li&gt;
+&lt;li&gt;@param succ&lt;br&gt;*/&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;function mergeToFtp(folder, file, succ) {&lt;br&gt;    var upload = new client();&lt;br&gt;    upload.connect(ftpConfig);&lt;br&gt;    upload.on(‘ready’, function () {&lt;br&gt;        upload.cwd(toFtpPath(folder), function (err) {&lt;br&gt;            if (err) throw err;&lt;br&gt;            upload.list(function (err, list) {&lt;br&gt;                var file_arr = [];&lt;br&gt;                list.forEach(function (item) {&lt;br&gt;                    if (!(item.type &amp;amp;&amp;amp; item.type == ‘d’)) {&lt;br&gt;                        var name = item.name || ‘’;&lt;br&gt;                        if (file_arr.indexOf(name) == -1) {&lt;br&gt;                            file_arr.push(name);&lt;br&gt;                        }&lt;br&gt;                    }&lt;br&gt;                });&lt;br&gt;                (function inner(upload, ftp_arr) {&lt;br&gt;                    if (file.length &amp;gt; 0) {&lt;br&gt;                        // ftp上的文件名&lt;br&gt;                        var ori&lt;em&gt;ftp = null;&lt;br&gt;                        var reg = /&lt;/em&gt;\w{8}(?=.)/;&lt;br&gt;                        // 写入类型&lt;br&gt;                        var type = 1;&lt;br&gt;                        // 获取当前文件&lt;br&gt;                        var curFile = file.shift();&lt;br&gt;                        // 获取当前文件对应的 FTP 地址&lt;br&gt;                        var ftp_path = toFtpPath(curFile);&lt;br&gt;                        // 获取当前文件的文件名&lt;br&gt;                        var file_name = path.basename(ftp_path);&lt;br&gt;                        // 获取当前文件 fis3 转换前的文件名&lt;br&gt;                        var ori_file_name = file_name.replace(reg, ‘’);&lt;br&gt;                        ftp_arr.forEach(function (ftp_name) {&lt;br&gt;                            // 获取 fis3 处理前的 ftp 文件名&lt;br&gt;                            var ori_ftp_name = ftp_name.replace(reg, ‘’);&lt;br&gt;                            // 判断写入方式&lt;br&gt;                            if (ftp_name == file_name) {&lt;br&gt;                                // 文件未发生改变,无需写入&lt;br&gt;                                type = 3;&lt;br&gt;                            } else if (ori_ftp_name == ori_file_name) {&lt;br&gt;                                // 存在旧文件&lt;br&gt;                                type = 2;&lt;br&gt;                                var parentFtp = path.dirname(ftp_path);&lt;br&gt;                                ori_ftp = path.join(parentFtp, ftp_name);&lt;br&gt;                            }&lt;br&gt;                        });&lt;br&gt;                        var map = {};&lt;br&gt;                        map.type = type;&lt;br&gt;                        map.file = curFile;&lt;br&gt;                        map.ori_ftp = ori_ftp;&lt;br&gt;                        map.fileToFtp = ftp_path;&lt;br&gt;                        upMap.push(map);&lt;br&gt;                        inner(upload, ftp_arr);&lt;br&gt;                    } else {&lt;br&gt;                        succ &amp;amp;&amp;amp; succ(upMap);&lt;br&gt;                        upload.end();&lt;br&gt;                    }&lt;br&gt;                })(upload, file_arr);&lt;br&gt;            });&lt;br&gt;        });&lt;br&gt;    });&lt;br&gt;}&lt;/p&gt;
+&lt;p&gt;/**&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;功能 : 把本地文件的路径转换成 ftp 的路径&lt;/li&gt;
+&lt;li&gt;@param item_path&lt;/li&gt;
+&lt;li&gt;@returns {&lt;em&gt;}
+&lt;/em&gt;/&lt;br&gt;function toFtpPath(item_path) {&lt;br&gt; // 获取文件的相对路径&lt;br&gt; var relative = item_path.replace(staticPath, ‘’);&lt;br&gt; // 返回 FTP 上的文件地址&lt;br&gt; return path.join(file_directory, relative);&lt;br&gt;}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;/**&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在 FTP 上创建文件夹&lt;/li&gt;
+&lt;li&gt;@param succ&lt;br&gt;*/&lt;br&gt;function createFtpFolder(succ) {&lt;br&gt; var upload = new client();&lt;br&gt; upload.connect(ftpConfig);&lt;br&gt; upload.on(‘ready’, function () {&lt;pre&gt;&lt;code&gt;(function inner(upload, finish) {
+    if (folderStore.length &amp;gt; 0) {
+        var ftp_path = folderStore.shift();
+        upload.mkdir(ftp_path, function (err) {
+            if (err) console.log(&amp;quot;文件夹 : &amp;quot; + ftp_path.replace(file_directory, &amp;apos;&amp;apos;) + &amp;quot; 存在 !&amp;quot;);
+            else console.log(&amp;quot;文件夹 : &amp;quot; + ftp_path.replace(file_directory, &amp;apos;&amp;apos;) + &amp;quot; 创建成功 !&amp;quot;);
+            inner(upload, finish);
+        });
+    } else {
+        finish &amp;amp;&amp;amp; finish();
+        upload.end();
+    }
+})(upload, succ);
+&lt;/code&gt;&lt;/pre&gt; });&lt;br&gt;}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;// 对需要上传的文件按照所在的目录排序&lt;br&gt;function classifyByFolder(fileStore) {&lt;br&gt;    // 用于存储目录与目录下的文件的对应关系&lt;br&gt;    var map = {};&lt;br&gt;    var length = 0;&lt;br&gt;    fileStore.forEach(function (item) {&lt;br&gt;        // 获取文件的目录&lt;br&gt;        var dir = path.dirname(item);&lt;br&gt;        if (!map[dir]) {&lt;br&gt;            map[dir] = [];&lt;br&gt;            ++length;&lt;br&gt;        }&lt;br&gt;        map[dir].push(item);&lt;br&gt;    });&lt;br&gt;    return {&lt;br&gt;        map: map,&lt;br&gt;        length: length&lt;br&gt;    };&lt;br&gt;}&lt;/p&gt;
+&lt;p&gt;/**&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;功能 : ftp 发送文件&lt;/li&gt;
+&lt;li&gt;@param upload&lt;/li&gt;
+&lt;li&gt;@param diskPath&lt;/li&gt;
+&lt;li&gt;@param ftpPath&lt;/li&gt;
+&lt;li&gt;@param succ&lt;br&gt;*/&lt;br&gt;function fileToFtp(upload, diskPath, ftpPath, succ) {&lt;br&gt; upload.put(diskPath, ftpPath, function (err) {&lt;pre&gt;&lt;code&gt;if (err) throw err;
+succ &amp;amp;&amp;amp; succ();
+&lt;/code&gt;&lt;/pre&gt; });&lt;br&gt;}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;/**&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;功能 : 删除 FTP 的指定文件&lt;/li&gt;
+&lt;li&gt;@param delDown&lt;/li&gt;
+&lt;li&gt;@param ftpPath&lt;/li&gt;
+&lt;li&gt;@param succ&lt;br&gt;*/&lt;br&gt;function deleteFromFtp(delDown, ftpPath, succ) {&lt;br&gt; delDown.delete(ftpPath, function (err) {&lt;pre&gt;&lt;code&gt;if (err) throw err;
+succ &amp;amp;&amp;amp; succ();
+&lt;/code&gt;&lt;/pre&gt; });&lt;br&gt;}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;// 上传文件去 ftp&lt;br&gt;function sendToFtp(upMap, succ) {&lt;br&gt;    var upload = new client();&lt;br&gt;    upload.connect(ftpConfig);&lt;br&gt;    upload.on(‘ready’, function () {&lt;br&gt;        (function inner(upload, finish) {&lt;br&gt;            if (upMap.length &amp;gt; 0) {&lt;br&gt;                var curMap = upMap.shift();&lt;br&gt;                if (curMap.type == 3) {&lt;br&gt;                    console.log(“文件: “ + path.basename(curMap.file) + “未发生改变,无需上传!”);&lt;br&gt;                    inner(upload, finish);&lt;br&gt;                } else {&lt;br&gt;                    // 直接写入&lt;br&gt;                    if (curMap.type == 1) {&lt;br&gt;                        fileToFtp(upload, curMap.file, curMap.fileToFtp, function () {&lt;br&gt;                            console.log(“新增文件: “ + path.basename(curMap.fileToFtp) + “成功!”);&lt;br&gt;                            inner(upload, finish);&lt;br&gt;                        });&lt;br&gt;                    } else {&lt;br&gt;                        // 删除后写入&lt;br&gt;                        curMap.ori_ftp &amp;amp;&amp;amp; deleteFromFtp(upload, curMap.ori_ftp, function () {&lt;br&gt;                            console.log(“删除旧文件: “ + path.basename(curMap.ori_ftp) + “成功!”);&lt;br&gt;                            fileToFtp(upload, curMap.file, curMap.fileToFtp, function () {&lt;br&gt;                                console.log(“更新文件: “ + path.basename(curMap.fileToFtp) + “成功!”);&lt;br&gt;                                inner(upload, finish);&lt;br&gt;                            });&lt;br&gt;                        });&lt;br&gt;                    }&lt;br&gt;                }&lt;br&gt;            } else {&lt;br&gt;                succ &amp;amp;&amp;amp; succ();&lt;br&gt;                upload.end();&lt;br&gt;            }&lt;br&gt;        })(upload, succ);&lt;br&gt;    });&lt;br&gt;}&lt;/p&gt;
+&lt;p&gt;function doFtpWork() {&lt;br&gt;    ++retryCount;&lt;br&gt;    //打印出错误&lt;br&gt;    console.log(‘步骤4 : 获取需要创建的文件夹’);&lt;br&gt;    // 获取需要上传文件的所有路径,以供在需要时创建&lt;br&gt;    walk(staticPath, function (item_path) {&lt;br&gt;        // 获取需要上传的文件&lt;br&gt;        fileStore.push(item_path);&lt;br&gt;        // 获取 FTP 上的文件地址&lt;br&gt;        var ftpPath = toFtpPath(item_path);&lt;br&gt;        // 获取文件所在的文件夹&lt;br&gt;        var folder = path.dirname(ftpPath);&lt;br&gt;        // 对路径进行格式化操作&lt;br&gt;        var n_ftpPath = path.normalize(folder);&lt;br&gt;        var n_file_directory = path.normalize(file_directory);&lt;br&gt;        // 获取相对路径&lt;br&gt;        var relative = n_ftpPath.replace(n_file_directory, ‘’);&lt;br&gt;        // 获取所有的分路径数组&lt;br&gt;        relative = relative.split(path.sep).filter(function (item) {&lt;br&gt;            // 去掉数组中空字符串的元素&lt;br&gt;            return item;&lt;br&gt;        });&lt;br&gt;        // 获取所有的分路径,并去重&lt;br&gt;        if (relative.length &amp;gt; 0) {&lt;br&gt;            for (var i = 1; i &amp;lt;= relative.length; i++) {&lt;br&gt;                // 获取所有的分路径数组&lt;br&gt;                var path_array = relative.slice(0, i);&lt;br&gt;                // 获取分路径&lt;br&gt;                var single_path = path.normalize(file_directory);&lt;br&gt;                path_array.forEach(function (item) {&lt;br&gt;                    single_path = path.join(single_path, item)&lt;br&gt;                });&lt;br&gt;                if (folderStore.indexOf(single_path) == -1) {&lt;br&gt;                    folderStore.push(single_path);&lt;br&gt;                }&lt;br&gt;            }&lt;br&gt;        }&lt;br&gt;    });&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 创建文件夹
+if (folderStore.length &amp;gt; 0) {
+    createFtpFolder(function () {
+        console.log(&amp;apos;步骤5 : 文件夹创建完毕,开始上传文件&amp;apos;);
+        // 把文件按照所在的目录归类
+        var classify = classifyByFolder(fileStore);
+        var map = classify.map;
+        // 获取 map 的 length
+        var length = classify.length;
+        for (var folder in map) {
+            if (map.hasOwnProperty(folder)) {
+                mergeToFtp(folder, map[folder], function (upMap) {
+                    if (--length == 0) {
+                        // 遍历完所有的文件之后,根据上传类型上传文件
+                        sendToFtp(upMap, function () {
+                            console.log(couLine + &amp;quot;上传完成&amp;quot; + couLine);
+                        });
+                    }
+                });
+            }
+        }
+    })
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;}&lt;/p&gt;
+&lt;p&gt;doFtpWork();&lt;/p&gt;
+&lt;p&gt;```&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前言：fis3 可以进行文件压缩，灰度发布，自动生成精灵图，最重要的他可以用文件指纹的方式解决浏览器缓存机制所带来的静态资源发布时，用户可能读取的仍是缓存的旧文件而无法实时更新的问题。
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://yoursite.com/categories/javascript/"/>
+    
+    
+      <category term="fis3" scheme="http://yoursite.com/tags/fis3/"/>
     
   </entry>
   
