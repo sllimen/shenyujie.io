@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-10-04T07:02:59.719Z</updated>
+  <updated>2016-10-04T06:26:07.300Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,36 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Javascript 跨域(八) 之 CORS</title>
-    <link href="http://yoursite.com/2016/08/28/Javascript-%E8%B7%A8%E5%9F%9F-%E5%85%AB-%E4%B9%8B-CORS/"/>
-    <id>http://yoursite.com/2016/08/28/Javascript-跨域-八-之-CORS/</id>
-    <published>2016-08-28T06:51:46.000Z</published>
-    <updated>2016-10-04T07:02:59.719Z</updated>
-    
-    <content type="html">&lt;p&gt;前言：终于写到跨域的倒数第二篇了（最后一篇flash因为兼容性太奇葩还要额外装插件，我们先无视），算下来这可以算是最后一篇跨域的文章也不为过。  &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;既然写文章，肯定是要百度一番的，何况我对 CORS 跨域用的不算多，不是很熟练。上百度一搜，这么重要的前端跨域技术竟然很少有提及，卫星定位系统反而占据了搜索页的第一条，我不得不感叹，果然度娘只适合看各种内涵段子，技术问题还是要问 google  &lt;/p&gt;
-&lt;h2 id=&quot;优势&quot;&gt;&lt;a href=&quot;#优势&quot; class=&quot;headerlink&quot; title=&quot;优势&quot;&gt;&lt;/a&gt;优势&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;CORS 支持所有类型的 HTTP 请求&lt;/li&gt;
-&lt;li&gt;开发者可以使用普通的 XMLHttpRequest 来发起或是取得数据&lt;/li&gt;
-&lt;li&gt;现在大部分主流的浏览器均以支持 CORS&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;兼容性&quot;&gt;&lt;a href=&quot;#兼容性&quot; class=&quot;headerlink&quot; title=&quot;兼容性&quot;&gt;&lt;/a&gt;兼容性&lt;/h2&gt;&lt;iframe src=&quot;http://caniuse.com/#feat=cors&quot; style=&quot;width:100%;height:400px&quot;&gt;&lt;/iframe&gt;  
-
-&lt;h2 id=&quot;服务器端的实现&quot;&gt;&lt;a href=&quot;#服务器端的实现&quot; class=&quot;headerlink&quot; title=&quot;服务器端的实现&quot;&gt;&lt;/a&gt;服务器端的实现&lt;/h2&gt;</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;前言：终于写到跨域的倒数第二篇了（最后一篇flash因为兼容性太奇葩还要额外装插件，我们先无视），算下来这可以算是最后一篇跨域的文章也不为过。
-    
-    </summary>
-    
-      <category term="javascript" scheme="http://yoursite.com/categories/javascript/"/>
-    
-    
-      <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
-    
-  </entry>
   
   <entry>
     <title>Javascript 跨域(七) 之 postMessage</title>
