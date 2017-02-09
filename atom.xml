@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-09T09:46:49.946Z</updated>
+  <updated>2017-02-09T09:51:23.843Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,12 +20,12 @@
     <link href="http://yoursite.com/2017/02/09/CSS-%E6%94%B9%E5%8F%98%E9%80%89%E4%B8%AD%E6%97%B6%E6%94%B9%E5%8F%98%E9%80%89%E4%B8%AD%E6%96%87%E5%AD%97%E7%9A%84%E9%A2%9C%E8%89%B2%E5%8F%8A%E8%83%8C%E6%99%AF%E8%89%B2/"/>
     <id>http://yoursite.com/2017/02/09/CSS-改变选中时改变选中文字的颜色及背景色/</id>
     <published>2017-02-09T09:40:10.000Z</published>
-    <updated>2017-02-09T09:46:49.946Z</updated>
+    <updated>2017-02-09T09:51:23.843Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;一般情况下，我们选中的网页的文本都是深蓝的底色，白色的字体(windows 下)，黑色的字体（mac os 下），如下所示：&lt;br&gt;&lt;img src=&quot;http://ocpuw0fat.bkt.clouddn.com/2017-2-9-selection-normals.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;但是我们有的时候会需要对文本选中样式进行修改，以达到统一样式风格的目的，这时候，使用 ::selection 伪类选择器就能做到。  &lt;/p&gt;
 &lt;h2 id=&quot;selection-伪类选择器的兼容性&quot;&gt;&lt;a href=&quot;#selection-伪类选择器的兼容性&quot; class=&quot;headerlink&quot; title=&quot;::selection 伪类选择器的兼容性&quot;&gt;&lt;/a&gt;::selection 伪类选择器的兼容性&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ocpuw0fat.bkt.clouddn.com/2017-2-9-selection-compatity.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;safari(ios 版本) 和 opera mini 浏览器兼容性会有影响以外，其他浏览器的兼容性很乐观。加之选择文本操作在移动端也不常用，兼容性问题基本可以排除  &lt;/p&gt;
 &lt;h2 id=&quot;selection-用法示例&quot;&gt;&lt;a href=&quot;#selection-用法示例&quot; class=&quot;headerlink&quot; title=&quot;:: selection 用法示例&quot;&gt;&lt;/a&gt;:: selection 用法示例&lt;/h2&gt;&lt;figure class=&quot;highlight asciidoc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;::selection &amp;#123;color:&lt;/span&gt; lightgreen;background: lightgray;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;::-moz-selection &amp;#123;color:&lt;/span&gt; lightgreen;background: lightgray;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;::-webkit-selection &amp;#123;color:&lt;/span&gt; lightgreen;background: lightgray;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;最终效果图:&lt;br&gt;&lt;img src=&quot;http://ocpuw0fat.bkt.clouddn.com/2017-2-9-used-selection.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;最终效果图:&lt;br&gt;&lt;img src=&quot;http://ocpuw0fat.bkt.clouddn.com/2017-2-9-used-selection.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;此时我们把选中文字的字体颜色改为了浅绿色，背景改为了浅灰色&lt;/p&gt;
 </content>
     
     <summary type="html">
