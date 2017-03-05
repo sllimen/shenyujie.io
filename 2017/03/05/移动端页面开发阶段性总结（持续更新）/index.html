@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="stay hungry stay foolish"><title>移动端页面开发阶段性总结（持续更新） | 愿无岁月可回首</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.1"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">移动端页面开发阶段性总结（持续更新）</h1><a id="logo" href="/.">愿无岁月可回首</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">移动端页面开发阶段性总结（持续更新）</h1><div class="post-meta">Mar 5, 2017<span> | </span><span class="category"><a href="/categories/html/">html</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><h2 id="meta-标签的移动端相关内容"><a href="#meta-标签的移动端相关内容" class="headerlink" title="meta 标签的移动端相关内容"></a>meta 标签的移动端相关内容</h2><ul>
+<li>设置移动端视口宽度，并且禁止缩放</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta <span class="built_in">name</span>=<span class="string">"viewport"</span> content=<span class="string">"width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"</span> /&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>设置移动端视口宽度为定宽（以 640px 为例）</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta <span class="built_in">name</span>=<span class="string">"viewport"</span> content=<span class="string">"width=640,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"</span> /&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>禁止将页面中的数字识别为电话号码</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta <span class="built_in">name</span>=<span class="string">"format-detection"</span> content=<span class="string">"telephone=no"</span> /&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>忽略 android 平台对邮箱地址的识别</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta <span class="built_in">name</span>=<span class="string">"format-detection"</span> content=<span class="string">"email=no"</span> /&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>当网站添加到主屏幕快速启动方式( 仅 IOS 7.0 版本之前的 safari 浏览器有效 )</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta <span class="built_in">name</span>=<span class="string">"apple-mobile-web-app-capable"</span> content=<span class="string">"yes"</span> /&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>设置网站在 ios 操作系统下，屏幕快捷方式的 safari 顶端状态条的样式</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta <span class="built_in">name</span>=<span class="string">"apple-mobile-web-app-status-bar-style"</span> content=<span class="string">"black"</span> /&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>描述网页内容 （便于 SEO ）</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta <span class="built_in">name</span>=<span class="string">"参数"</span> content=<span class="string">"具体的描述"</span> /&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>优先使用 IE 最高版本和 chrome</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge,chrome=1"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>禁止百度转码该软件</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Cache-Control"</span> <span class="attr">content</span>=<span class="string">"no-siteapp"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>启用 webApp 的全屏模式</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta <span class="built_in">name</span>=<span class="string">"apple-mobile-web-app-capable"</span> content=<span class="string">"yes"</span> /&gt;</div></pre></td></tr></table></figure>
+<h2 id="CSS-样式技巧"><a href="#CSS-样式技巧" class="headerlink" title="CSS 样式技巧"></a>CSS 样式技巧</h2><ul>
+<li>禁止 ios 和 android 用户选中文字</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.css</span>&#123;<span class="attribute">-webkit-user-select</span>:none&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>禁止 ios 长按时触发系统菜单 ， 禁止 ios 和 android 系统长按图片时，下载该图片</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.css</span>&#123;<span class="attribute">-webkit-touch-callout</span>: none&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>修改 webkit 内核的浏览器，input 输入框 placeholder 的样式</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">input:</span><span class="symbol">:-webkit-input-placeholder</span>&#123;<span class="symbol">color:</span><span class="comment">#AAAAAA;&#125;</span></div><div class="line"><span class="symbol">input:</span><span class="symbol">focus:</span><span class="symbol">:-webkit-input-placeholder</span>&#123;<span class="symbol">color:</span><span class="comment">#AAAAAA;&#125;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>ios 下使用-webkit-text-size-adjust禁止调整字体大小</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">-webkit-text-size-adjust</span>: <span class="number">100%</span><span class="meta">!important</span>;&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>android 上去掉语音输入按钮</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">input:</span><span class="symbol">:-webkit-input-speech-button</span> &#123;<span class="symbol">display:</span> none&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>去除点击 android 系统下<code>&lt;a&gt; &lt;button&gt; &lt;input&gt;</code> 标签时产生的边框，并且去除 ios 系统下点击 a 标签时产生的半透明灰色背景</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">a</span>,<span class="selector-tag">button</span>,<span class="selector-tag">input</span>&#123;<span class="attribute">-webkit-tap-highlight-color</span>:<span class="built_in">rgba</span>(255,0,0,0);&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>禁用Webkit内核浏览器的文字大小调整功能</li>
+</ul>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-webkit-<span class="built_in">text</span>-<span class="built_in">size</span>-adjust: none;</div></pre></td></tr></table></figure>
+<h2 id="标签相关样式技巧"><a href="#标签相关样式技巧" class="headerlink" title="标签相关样式技巧"></a>标签相关样式技巧</h2><ul>
+<li>上传图片</li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="keyword">file</span> accept=<span class="string">"image/*"</span>&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>上传视频</li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="keyword">file</span> accept=<span class="string">"video/*"</span>&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>拨打电话</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"tel:10086"</span>&gt;</span>打电话给:10086<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>发送短信</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"sms:10086"</span>&gt;</span>发短信给: 10086<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>小技巧暂时整理那么多，以后会继续更新</p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.1" async></script><a data-url="http://yoursite.com/2017/03/05/移动端页面开发阶段性总结（持续更新）/" data-id="cizw9s1sn001emtshrelq3k0i" class="article-share-link">分享到</a><div class="tags"><a href="/tags/html/">html</a></div><div class="post-nav"><a href="/2017/02/22/CSS-实现元素垂直居中/" class="next">CSS 实现元素垂直居中</a></div></div></div></div><div class="pure-u-1-4"><div id="sidebar"><div class="widget"><form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="search" name="word" maxlength="20" placeholder="Search"/><input type="hidden" name="si" value="http://yoursite.com"/><input name="tn" type="hidden" value="bds"/><input name="cl" type="hidden" value="3"/><input name="ct" type="hidden" value="2097152"/><input name="s" type="hidden" value="on"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/canvas/">canvas</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css-布局/">css 布局</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/跨域/" style="font-size: 15px;">跨域</a> <a href="/tags/移动端/" style="font-size: 15px;">移动端</a> <a href="/tags/fis3/" style="font-size: 15px;">fis3</a> <a href="/tags/心情/" style="font-size: 15px;">心情</a> <a href="/tags/html/" style="font-size: 15px;">html</a> <a href="/tags/canvas-retina-兼容性/" style="font-size: 15px;">canvas retina 兼容性</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/移动端页面开发阶段性总结（持续更新）/">移动端页面开发阶段性总结（持续更新）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/CSS-实现元素垂直居中/">CSS 实现元素垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/解决-HTML5-Canvas-在高分屏下的模糊问题/">解决 HTML5 Canvas 在高分屏下的模糊问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/09/CSS-改变选中时改变选中文字的颜色及背景色/">CSS 改变选中时改变选中文字的颜色及背景色</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/22/Javascript-跨域-七-之-postMessage/">Javascript 跨域(七) 之 postMessage</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/21/Javascript跨域-六-之-document-domain-iframe/">Javascript 跨域(六)之 document.domain + iframe</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/15/Javascript-跨-五-之-window-location-hash-iframe/">Javascript 跨域(五)之 window.location.hash + iframe</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/10/Javascipt-跨域-四-之-window-name-iframe/">Javascript 跨域(四)之 window.name + iframe</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/01/Javascript-跨域之-WebSocket/">Javascript 跨域(三)之 WebSocket</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/JavaScript-跨域之JSONP/">JavaScript 跨域(二) 之 JSONP</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.baidu.com/" title="百度" target="_blank">百度</a><ul></ul><a href="http://deerchao.net/tutorials/regex/regex.htm#mission" title="正则表达式教程" target="_blank">正则表达式教程</a><ul></ul><a href="http://www.duzhe.com/" title="读者" target="_blank">读者</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">愿无岁月可回首.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.1" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.1" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.1"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.1"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.1"></script></div></body></html>
