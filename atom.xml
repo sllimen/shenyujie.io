@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-22T03:35:43.058Z</updated>
+  <updated>2017-03-08T08:26:27.600Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>简单尝试下 JS 中点击（单击）事件的触发顺序</title>
+    <link href="http://yoursite.com/2017/03/08/%E7%AE%80%E5%8D%95%E5%B0%9D%E8%AF%95%E4%B8%8B-JS-%E4%B8%AD%E7%82%B9%E5%87%BB%EF%BC%88%E5%8D%95%E5%87%BB%EF%BC%89%E4%BA%8B%E4%BB%B6%E7%9A%84%E8%A7%A6%E5%8F%91%E9%A1%BA%E5%BA%8F/"/>
+    <id>http://yoursite.com/2017/03/08/简单尝试下-JS-中点击（单击）事件的触发顺序/</id>
+    <published>2017-03-08T08:24:20.000Z</published>
+    <updated>2017-03-08T08:26:27.600Z</updated>
+    
+    <content type="html">&lt;p&gt;最近突发奇想，要是在同一个元素上同时绑定不同的点击事件（同一时刻触发），此时就有必要明确同一次点击事件时各个事件的触发顺序，这边先从简单的尝试起&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;事件选取&quot;&gt;&lt;a href=&quot;#事件选取&quot; class=&quot;headerlink&quot; title=&quot;事件选取&quot;&gt;&lt;/a&gt;事件选取&lt;/h2&gt;&lt;p&gt;这里我们选取的单击事件一共是5种:touchstart , touchend , onmousedown , onmouseup , click  &lt;/p&gt;
+&lt;p&gt;因为 click 有 300 毫秒延迟的问题，所以最主要就是比较 touchstart 和 onmouseup 的优先级顺序，测试代码如下：  &lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; count = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; oDom = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementById(&lt;span class=&quot;string&quot;&gt;&#39;oDiv&#39;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  oDom.addEventListener(&lt;span class=&quot;string&quot;&gt;&#39;click&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;click 事件位于第: &quot;&lt;/span&gt; + count++ + &lt;span class=&quot;string&quot;&gt;&quot;顺序触发&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;, &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  oDom.addEventListener(&lt;span class=&quot;string&quot;&gt;&#39;touchstart&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;touchstart 事件位于第: &quot;&lt;/span&gt; + count++ + &lt;span class=&quot;string&quot;&gt;&quot;顺序触发&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;, &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  oDom.addEventListener(&lt;span class=&quot;string&quot;&gt;&#39;touchend&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;touchend 事件位于第: &quot;&lt;/span&gt; + count++ + &lt;span class=&quot;string&quot;&gt;&quot;顺序触发&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;, &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  oDom.addEventListener(&lt;span class=&quot;string&quot;&gt;&#39;mousedown&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;mousedown 事件位于第: &quot;&lt;/span&gt; + count++ + &lt;span class=&quot;string&quot;&gt;&quot;顺序触发&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;, &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  oDom.addEventListener(&lt;span class=&quot;string&quot;&gt;&#39;mouseup&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;mouseup 事件位于第: &quot;&lt;/span&gt; + count++ + &lt;span class=&quot;string&quot;&gt;&quot;顺序触发&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;, &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;结果 ：&lt;br&gt;&lt;img src=&quot;http://ocpuw0fat.bkt.clouddn.com/2017-3-8-event.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;所以事件触发的顺序是：&lt;br&gt;touchstart -&amp;gt; touchend -&amp;gt; mousedown -&amp;gt; mouseup -&amp;gt; click&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近突发奇想，要是在同一个元素上同时绑定不同的点击事件（同一时刻触发），此时就有必要明确同一次点击事件时各个事件的触发顺序，这边先从简单的尝试起&lt;br&gt;
+    
+    </summary>
+    
+      <category term="html" scheme="http://yoursite.com/categories/html/"/>
+    
+    
+      <category term="html" scheme="http://yoursite.com/tags/html/"/>
+    
+  </entry>
   
   <entry>
     <title>CSS 实现元素垂直居中</title>
